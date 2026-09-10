@@ -8,6 +8,10 @@ import { Button, Card, CardBody, CardHeader, Input, Label } from "@prize/ui";
 import { FormSplitLayout } from "@/components/form-split-layout";
 import { InlineAlert } from "@/components/inline-alert";
 import { Plus, Trash2 } from "lucide-react";
+import {
+  DEFAULT_INVENTORY_SETTINGS,
+  type InventorySettingsJson,
+} from "@prize/types";
 
 export default function SettingsPage() {
   const t = useTranslations("settings");
@@ -20,9 +24,14 @@ export default function SettingsPage() {
   const [timezone, setTimezone] = useState("");
   const [reasons, setReasons] = useState<string[]>([]);
   const [newReason, setNewReason] = useState("");
+  const [inv, setInv] = useState<InventorySettingsJson>({
+    ...DEFAULT_INVENTORY_SETTINGS,
+  });
+  const [presetDraft, setPresetDraft] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const [reasonsSaved, setReasonsSaved] = useState(false);
+  const [invSaved, setInvSaved] = useState(false);
 
   const data = useQuery({
     queryKey: ["settings"],
@@ -39,6 +48,9 @@ export default function SettingsPage() {
     setTimezone(h.timezone ?? "");
     if (Array.isArray(data.data?.complimentaryReasons)) {
       setReasons(data.data.complimentaryReasons);
+    }
+    if (data.data?.inventorySettings) {
+      setInv(data.data.inventorySettings as InventorySettingsJson);
     }
   }, [data.data]);
 
@@ -81,6 +93,26 @@ export default function SettingsPage() {
     onError: (e: Error) => setError(e.message),
   });
 
+  const saveInventory = useMutation({
+    mutationFn: async (next: InventorySettingsJson) => {
+      const res = await fetch("/api/v1/settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ inventorySettings: next }),
+      });
+      if (!res.ok) throw new Error((await res.json()).error);
+      return res.json();
+    },
+    onSuccess: () => {
+      setError(null);
+      setInvSaved(true);
+      qc.invalidateQueries({ queryKey: ["settings"] });
+      qc.invalidateQueries({ queryKey: ["inventory-settings"] });
+      setTimeout(() => setInvSaved(false), 2000);
+    },
+    onError: (e: Error) => setError(e.message),
+  });
+
   function addReason() {
     const label = newReason.trim();
     if (!label) return;
@@ -97,6 +129,18 @@ export default function SettingsPage() {
     if (Array.isArray(defaults) && defaults.length > 0) {
       setReasons([...defaults]);
     }
+  }
+
+  function addPreset() {
+    const n = Number(presetDraft.replace(",", "."));
+    if (!Number.isFinite(n) || n < 0 || n > 20) return;
+    setInv((prev) => ({
+      ...prev,
+      liquidPresets: [...new Set([...prev.liquidPresets, Number(n.toFixed(3))])].sort(
+        (a, b) => a - b
+      ),
+    }));
+    setPresetDraft("");
   }
 
   return (
@@ -158,6 +202,218 @@ export default function SettingsPage() {
                 >
                   {t("save")}
                 </Button>
+              </CardBody>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div>
+                  <div>{t("inventory.title")}</div>
+                  <p className="mt-1 text-xs font-normal text-[var(--text-muted)]">
+                    {t("inventory.hint")}
+                  </p>
+                </div>
+              </CardHeader>
+              <CardBody className="space-y-4">
+                <label className="flex items-start gap-3 text-sm">
+                  <input
+                    type="checkbox"
+                    className="mt-1"
+                    checked={inv.requireReviewBeforeClose}
+                    onChange={(e) =>
+                      setInv((p) => ({
+                        ...p,
+                        requireReviewBeforeClose: e.target.checked,
+                      }))
+                    }
+                  />
+                  <span>
+                    <span className="font-medium text-[var(--text)]">
+                      {t("inventory.requireReview")}
+                    </span>
+                    <span className="mt-0.5 block text-xs text-[var(--text-muted)]">
+                      {t("inventory.requireReviewHint")}
+                    </span>
+                  </span>
+                </label>
+                <label className="flex items-start gap-3 text-sm">
+                  <input
+                    type="checkbox"
+                    className="mt-1"
+                    checked={inv.allowCloseWithUncounted}
+                    onChange={(e) =>
+                      setInv((p) => ({
+                        ...p,
+                        allowCloseWithUncounted: e.target.checked,
+                      }))
+                    }
+                  />
+                  <span>
+                    <span className="font-medium text-[var(--text)]">
+                      {t("inventory.allowUncounted")}
+                    </span>
+                    <span className="mt-0.5 block text-xs text-[var(--text-muted)]">
+                      {t("inventory.allowUncountedHint")}
+                    </span>
+                  </span>
+                </label>
+                <label className="flex items-start gap-3 text-sm">
+                  <input
+                    type="checkbox"
+                    className="mt-1"
+                    checked={inv.uncountedMeansZero}
+                    disabled={!inv.allowCloseWithUncounted}
+                    onChange={(e) =>
+                      setInv((p) => ({
+                        ...p,
+                        uncountedMeansZero: e.target.checked,
+                      }))
+                    }
+                  />
+                  <span>
+                    <span className="font-medium text-[var(--text)]">
+                      {t("inventory.uncountedZero")}
+                    </span>
+                    <span className="mt-0.5 block text-xs text-[var(--text-muted)]">
+                      {t("inventory.uncountedZeroHint")}
+                    </span>
+                  </span>
+                </label>
+                <label className="flex items-start gap-3 text-sm">
+                  <input
+                    type="checkbox"
+                    className="mt-1"
+                    checked={inv.showMlAlongsideBottles}
+                    onChange={(e) =>
+                      setInv((p) => ({
+                        ...p,
+                        showMlAlongsideBottles: e.target.checked,
+                      }))
+                    }
+                  />
+                  <span>
+                    <span className="font-medium text-[var(--text)]">
+                      {t("inventory.showMl")}
+                    </span>
+                    <span className="mt-0.5 block text-xs text-[var(--text-muted)]">
+                      {t("inventory.showMlHint")}
+                    </span>
+                  </span>
+                </label>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <Label>{t("inventory.liquidStep")}</Label>
+                    <Input
+                      type="number"
+                      step="0.01"
+                      min="0.01"
+                      max="1"
+                      value={inv.liquidStep}
+                      onChange={(e) =>
+                        setInv((p) => ({
+                          ...p,
+                          liquidStep: Number(e.target.value) || 0.05,
+                        }))
+                      }
+                    />
+                  </div>
+                  <div>
+                    <Label>{t("inventory.staleDays")}</Label>
+                    <Input
+                      type="number"
+                      min="1"
+                      max="365"
+                      value={inv.staleOpenDays}
+                      onChange={(e) =>
+                        setInv((p) => ({
+                          ...p,
+                          staleOpenDays: Math.max(
+                            1,
+                            Math.round(Number(e.target.value) || 14)
+                          ),
+                        }))
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label>{t("inventory.presets")}</Label>
+                  <p className="mb-2 text-xs text-[var(--text-muted)]">
+                    {t("inventory.presetsHint")}
+                  </p>
+                  <div className="mb-2 flex flex-wrap gap-1.5">
+                    {inv.liquidPresets.map((p) => (
+                      <button
+                        key={p}
+                        type="button"
+                        onClick={() =>
+                          setInv((prev) => ({
+                            ...prev,
+                            liquidPresets: prev.liquidPresets.filter(
+                              (x) => x !== p
+                            ),
+                          }))
+                        }
+                        className="inline-flex items-center gap-1 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--card-hover)] px-2 py-1 text-xs font-medium text-[var(--text)] hover:border-[var(--danger)] hover:text-[var(--danger)]"
+                        title={t("inventory.removePreset")}
+                      >
+                        {p}
+                        <Trash2 className="h-3 w-3" />
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex gap-2">
+                    <Input
+                      className="flex-1"
+                      placeholder={t("inventory.newPreset")}
+                      value={presetDraft}
+                      onChange={(e) => setPresetDraft(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          addPreset();
+                        }
+                      }}
+                    />
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      onClick={addPreset}
+                      disabled={!presetDraft.trim()}
+                    >
+                      <Plus className="h-4 w-4" />
+                      {t("inventory.addPreset")}
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    onClick={() => saveInventory.mutate(inv)}
+                    disabled={
+                      saveInventory.isPending || inv.liquidPresets.length === 0
+                    }
+                  >
+                    {t("inventory.save")}
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() =>
+                      setInv({
+                        ...(data.data?.defaultInventorySettings ??
+                          DEFAULT_INVENTORY_SETTINGS),
+                      })
+                    }
+                  >
+                    {t("inventory.reset")}
+                  </Button>
+                </div>
+                {invSaved ? (
+                  <InlineAlert tone="success">{t("saved")}</InlineAlert>
+                ) : null}
               </CardBody>
             </Card>
 
@@ -259,6 +515,9 @@ export default function SettingsPage() {
                 )?.name ??
                   (data.data?.warehouses ?? [])[0]?.name ??
                   "Lager"}
+              </p>
+              <p className="mt-2 text-xs text-[var(--text-dim)]">
+                {t("inventory.singleWarehouseNote")}
               </p>
             </CardBody>
           </Card>

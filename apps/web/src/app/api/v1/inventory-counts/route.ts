@@ -6,12 +6,12 @@ import {
   jsonError,
 } from "@/lib/api";
 import { requireHotelContext } from "@/lib/tenant";
-import { inventoryCountCreateSchema, inventoryCountItemSchema } from "@prize/validators";
+import { inventoryCountCreateSchema } from "@prize/validators";
 import {
-  closeInventoryCount,
-  countInventoryItem,
   createInventoryCount,
+  loadInventoryProgress,
 } from "@/lib/inventory";
+import { getHotelInventorySettings } from "@/lib/inventory-settings";
 import { prisma } from "@/lib/db";
 
 export async function GET() {
@@ -21,17 +21,40 @@ export async function GET() {
     assertPermission(user, "inventory.view");
     const { hotelId } = await requireHotelContext(user);
 
-    const items = await prisma.inventoryCount.findMany({
-      where: { hotelId: hotelId },
-      include: {
-        warehouse: { select: { id: true, name: true, code: true } },
-        createdBy: { select: { id: true, name: true, email: true } },
-        _count: { select: { items: true } },
-      },
-      orderBy: { createdAt: "desc" },
-      take: 50,
+    const [items, settings] = await Promise.all([
+      prisma.inventoryCount.findMany({
+        where: { hotelId: hotelId },
+        include: {
+          warehouse: { select: { id: true, name: true, code: true } },
+          createdBy: { select: { id: true, name: true, email: true } },
+          _count: { select: { items: true } },
+        },
+        orderBy: { createdAt: "desc" },
+        take: 50,
+      }),
+      getHotelInventorySettings(hotelId),
+    ]);
+
+    const progress = await loadInventoryProgress(
+      hotelId,
+      items.map((i) => i.id)
+    );
+
+    return NextResponse.json({
+      inventorySettings: settings,
+      items: items.map((c) => {
+        const p = progress.get(c.id);
+        return {
+          ...c,
+          progress: {
+            itemCount: p?.itemCount ?? c._count.items,
+            countedCount: p?.countedCount ?? 0,
+            diffCount: p?.diffCount ?? 0,
+            valueDiffSum: p?.valueDiffSum ?? 0,
+          },
+        };
+      }),
     });
-    return NextResponse.json({ items });
   } catch (e) {
     if (isNextResponse(e)) return e;
     return jsonError("Server error", 500);

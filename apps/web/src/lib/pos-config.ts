@@ -39,13 +39,50 @@ export async function getPosConfigOverview(user: SessionUser) {
 
 export async function listPosCategories(user: SessionUser, includeInactive = true) {
   assertSessionHotelId(user);
-  return prisma.posCategory.findMany({
-    where: {
-      hotelId: user.hotelId,
-      ...(includeInactive ? {} : { isActive: true }),
-    },
-    orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
-    include: { _count: { select: { articles: true } } },
+  const hotelId = user.hotelId;
+  const [categories, productCategories, recipeCounts] = await Promise.all([
+    prisma.posCategory.findMany({
+      where: {
+        hotelId,
+        ...(includeInactive ? {} : { isActive: true }),
+      },
+      orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+      include: { _count: { select: { articles: true } } },
+    }),
+    prisma.productCategory.findMany({
+      where: { hotelId },
+      include: { _count: { select: { products: true } } },
+    }),
+    prisma.posArticle.groupBy({
+      by: ["posCategoryId"],
+      where: { hotelId, type: "RECIPE", posCategoryId: { not: null } },
+      _count: { _all: true },
+    }),
+  ]);
+
+  const productsByCode = new Map(
+    productCategories.map((c) => [c.code.toUpperCase(), c._count.products])
+  );
+  const productsByName = new Map(
+    productCategories.map((c) => [c.name.trim().toLowerCase(), c._count.products])
+  );
+  const recipesByPosCategoryId = new Map(
+    recipeCounts
+      .filter((r) => r.posCategoryId != null)
+      .map((r) => [r.posCategoryId!, r._count._all])
+  );
+
+  return categories.map((c) => {
+    const productCount =
+      (c.code ? productsByCode.get(c.code.toUpperCase()) : undefined) ??
+      productsByName.get(c.name.trim().toLowerCase());
+    const recipeCount = recipesByPosCategoryId.get(c.id) ?? 0;
+    const articles =
+      productCount !== undefined ? productCount + recipeCount : c._count.articles;
+    return {
+      ...c,
+      _count: { articles },
+    };
   });
 }
 

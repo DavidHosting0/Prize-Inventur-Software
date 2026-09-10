@@ -6,8 +6,6 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button, Input, Label } from "@prize/ui";
 import { hotelAppPath, localeAppPath } from "@/lib/hotel-url";
-import { BrandMark } from "./brand-mark";
-import { Lock, ShieldCheck } from "lucide-react";
 
 export function LoginForm() {
   const t = useTranslations("auth");
@@ -76,76 +74,105 @@ export function LoginForm() {
     window.location.href = localeAppPath(locale, "/dashboard");
   }
 
-  return (
-    <div className="login-panel">
-      <header className="login-panel-header">
-        <BrandMark
-          name={t("brandName")}
-          tag={t("brandTag")}
-          className="sidebar-brand !h-auto !min-h-0 !border-0 !bg-transparent !p-0"
-        />
-        <div className="login-panel-meta">
-          <span className="login-access-badge">
-            <ShieldCheck size={13} strokeWidth={2.25} aria-hidden />
-            {t("accessLabel")}
-          </span>
-          <span className="login-locale">{locale.toUpperCase()}</span>
-        </div>
-      </header>
+  const modules = [
+    t("capabilityInventory"),
+    t("capabilityPos"),
+    t("capabilityOps"),
+  ];
 
-      <div className="login-panel-intro">
-        <h1 className="login-panel-title">{t("loginTitle")}</h1>
-        <p className="login-panel-subtitle">{t("loginSubtitle")}</p>
+  return (
+    <section className="login-station" aria-labelledby="login-station-title">
+      <div className="login-station-titlebar">
+        <h1 id="login-station-title">{t("loginTitle")}</h1>
+        <span className="login-station-titlebar-meta">{t("accessLabel")}</span>
       </div>
 
-      <form onSubmit={onSubmit} className="login-panel-form">
-        <div className="login-field">
-          <Label htmlFor="email">{t("email")}</Label>
-          <Input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="username"
-            required
-            className="h-10"
-          />
-        </div>
-        <div className="login-field">
-          <Label htmlFor="password">{t("password")}</Label>
-          <Input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            required
-            className="h-10"
-          />
-        </div>
-        {error ? (
-          <div
-            className="rounded-[var(--radius-sm)] border border-[var(--danger)]/25 bg-[var(--danger-muted)] px-3 py-2.5 text-sm text-[var(--danger)]"
-            role="alert"
-          >
-            {error}
-          </div>
-        ) : null}
-        <Button
-          type="submit"
-          size="lg"
-          className="login-submit w-full"
-          disabled={loading}
-        >
-          <Lock size={15} strokeWidth={2.25} aria-hidden />
-          {loading ? t("signingIn") : t("signIn")}
-        </Button>
-      </form>
+      <div className="login-station-body">
+        <aside className="login-station-info">
+          <h2 className="login-station-section">{t("systemSection")}</h2>
+          <dl className="login-spec">
+            <div>
+              <dt>{t("specGroup")}</dt>
+              <dd>{t("panelEyebrow")}</dd>
+            </div>
+            <div>
+              <dt>{t("specProduct")}</dt>
+              <dd>
+                {t("brandName")} · {t("brandTag")}
+              </dd>
+            </div>
+            <div>
+              <dt>{t("specModules")}</dt>
+              <dd>
+                <ul className="login-module-list">
+                  {modules.map((name) => (
+                    <li key={name}>{name}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>{t("specScope")}</dt>
+              <dd>{t("loginSubtitle")}</dd>
+            </div>
+          </dl>
+        </aside>
 
-      <footer className="login-panel-footer">
-        <span className="login-footer-label">{t("demoHint")}</span>
-        <code className="login-footer-code">admin@demo-hotel.ch</code>
-      </footer>
-    </div>
+        <div className="login-station-credentials">
+          <h2 className="login-station-section">{t("credentialsSection")}</h2>
+          <form onSubmit={onSubmit} className="login-cred-form">
+            <div className="login-cred-row">
+              <Label htmlFor="email" className="login-cred-label">
+                {t("email")}
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="username"
+                required
+                className="login-cred-input"
+              />
+            </div>
+            <div className="login-cred-row">
+              <Label htmlFor="password" className="login-cred-label">
+                {t("password")}
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                required
+                className="login-cred-input"
+              />
+            </div>
+
+            {error ? (
+              <div className="login-cred-error" role="alert">
+                {error}
+              </div>
+            ) : null}
+
+            <div className="login-cred-actions">
+              <Button
+                type="submit"
+                className="login-cred-submit"
+                disabled={loading}
+              >
+                {loading ? t("signingIn") : t("signIn")}
+              </Button>
+            </div>
+          </form>
+
+          <div className="login-cred-note">
+            <span>{t("demoHint")}</span>
+            <code>admin@demo-hotel.ch</code>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

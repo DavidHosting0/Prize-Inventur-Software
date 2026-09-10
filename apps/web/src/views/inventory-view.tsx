@@ -27,6 +27,12 @@ type InventoryCountRow = {
   warehouse: { id: string; name: string; code: string } | null;
   createdBy: { id: string; name: string | null; email: string } | null;
   _count: { items: number };
+  progress?: {
+    itemCount: number;
+    countedCount: number;
+    diffCount: number;
+    valueDiffSum: number;
+  };
 };
 
 const ACTIVE_STATUSES = new Set(["DRAFT", "IN_PROGRESS", "REVIEW"]);
@@ -123,6 +129,8 @@ export default function InventoryPage() {
   });
 
   const items: InventoryCountRow[] = lists.data?.items ?? [];
+  const staleOpenDays =
+    lists.data?.inventorySettings?.staleOpenDays ?? 14;
   const active = useMemo(
     () => items.filter((c) => ACTIVE_STATUSES.has(c.status)),
     [items]
@@ -184,10 +192,16 @@ export default function InventoryPage() {
                 dateLocale={dateLocale}
                 openLabel={t("open")}
                 statusLabel={t(`status.${c.status}` as "status.IN_PROGRESS")}
-                itemCountLabel={t("itemCount", {
-                  count: c._count?.items ?? 0,
-                })}
                 startedLabel={t("startedAt")}
+                staleOpenDays={staleOpenDays}
+                progressLabel={t("progressLabel", {
+                  counted: c.progress?.countedCount ?? 0,
+                  total: c.progress?.itemCount ?? c._count?.items ?? 0,
+                })}
+                diffLabel={t("diffLabel", {
+                  count: c.progress?.diffCount ?? 0,
+                })}
+                staleLabel={t("staleWarning", { days: staleOpenDays })}
                 onOpen={() => navigateAppPath(`/inventory/${c.id}`)}
               />
             ))}
@@ -294,12 +308,14 @@ export default function InventoryPage() {
                         statusLabel={t(`status.${c.status}` as "status.CLOSED")}
                         period={periodLabel(c, dateLocale)}
                         labels={{
-                          warehouse: tc("warehouse"),
+                          warehouse: t("centralWarehouse"),
                           createdBy: t("createdBy"),
                           started: t("startedAt"),
                           closed: t("closedAt"),
-                          items: t("itemCount", {
-                            count: c._count?.items ?? 0,
+                          items: t("progressLabel", {
+                            counted: c.progress?.countedCount ?? 0,
+                            total:
+                              c.progress?.itemCount ?? c._count?.items ?? 0,
                           }),
                         }}
                         onOpen={() => navigateAppPath(`/inventory/${c.id}`)}
@@ -341,23 +357,54 @@ function OpenInventoryButton({
   );
 }
 
+function ProgressBar({ counted, total }: { counted: number; total: number }) {
+  const pct = total > 0 ? Math.min(100, Math.round((counted / total) * 100)) : 0;
+  return (
+    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--border-subtle)]">
+      <div
+        className="h-full rounded-full bg-[var(--primary)] transition-[width]"
+        style={{ width: `${pct}%` }}
+      />
+    </div>
+  );
+}
+
+function isStale(count: InventoryCountRow, staleOpenDays: number) {
+  if (!ACTIVE_STATUSES.has(count.status)) return false;
+  const start = new Date(count.startedAt ?? count.createdAt);
+  if (Number.isNaN(start.getTime())) return false;
+  const days =
+    (Date.now() - start.getTime()) / (1000 * 60 * 60 * 24);
+  return days > staleOpenDays;
+}
+
 function ActiveCountCard({
   count,
   dateLocale,
   openLabel,
   statusLabel,
-  itemCountLabel,
   startedLabel,
+  staleOpenDays,
+  progressLabel,
+  diffLabel,
+  staleLabel,
   onOpen,
 }: {
   count: InventoryCountRow;
   dateLocale: string;
   openLabel: string;
   statusLabel: string;
-  itemCountLabel: string;
   startedLabel: string;
+  staleOpenDays: number;
+  progressLabel: string;
+  diffLabel: string;
+  staleLabel: string;
   onOpen: () => void;
 }) {
+  const total = count.progress?.itemCount ?? count._count?.items ?? 0;
+  const counted = count.progress?.countedCount ?? 0;
+  const stale = isStale(count, staleOpenDays);
+
   return (
     <div className="overflow-hidden rounded-[var(--radius)] border border-[var(--warning)]/35 bg-[var(--card)] shadow-[var(--shadow-sm)]">
       <div className="flex flex-wrap items-stretch gap-0">
@@ -369,6 +416,9 @@ function ActiveCountCard({
               <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-dim)]">
                 {periodLabel(count, dateLocale)}
               </span>
+              {stale ? (
+                <Badge tone="danger">{staleLabel}</Badge>
+              ) : null}
             </div>
             <h3 className="truncate text-base font-semibold text-[var(--text)]">
               {count.name}
@@ -380,7 +430,9 @@ function ActiveCountCard({
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <ClipboardList className="h-3.5 w-3.5 text-[var(--text-dim)]" />
-                {itemCountLabel}
+                {progressLabel}
+                <span className="text-[var(--border)]">·</span>
+                {diffLabel}
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <CalendarClock className="h-3.5 w-3.5 text-[var(--text-dim)]" />
@@ -392,6 +444,7 @@ function ActiveCountCard({
                 {count.createdBy?.name || count.createdBy?.email || "—"}
               </span>
             </div>
+            <ProgressBar counted={counted} total={total} />
           </div>
           <OpenInventoryButton
             label={openLabel}

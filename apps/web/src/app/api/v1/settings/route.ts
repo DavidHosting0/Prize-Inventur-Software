@@ -8,7 +8,11 @@ import {
 import { requireHotelContext } from "@/lib/tenant";
 import { prisma } from "@/lib/db";
 import { parseComplimentaryReasons } from "@/lib/pos-bootstrap";
-import { DEFAULT_COMPLIMENTARY_REASONS } from "@prize/types";
+import { parseInventorySettings } from "@/lib/inventory-settings";
+import {
+  DEFAULT_COMPLIMENTARY_REASONS,
+  DEFAULT_INVENTORY_SETTINGS,
+} from "@prize/types";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
 
@@ -31,6 +35,7 @@ export async function GET() {
         city: true,
         country: true,
         posSettings: true,
+        inventorySettings: true,
       },
     });
     const warehouses = await prisma.warehouse.findMany({
@@ -60,12 +65,24 @@ export async function GET() {
       complimentaryReasons,
       complimentaryReasonsIsDefault: !hasCustomReasons,
       defaultComplimentaryReasons: [...DEFAULT_COMPLIMENTARY_REASONS],
+      inventorySettings: parseInventorySettings(hotel.inventorySettings),
+      defaultInventorySettings: DEFAULT_INVENTORY_SETTINGS,
     });
   } catch (e) {
     if (isNextResponse(e)) return e;
     return jsonError("Server error", 500);
   }
 }
+
+const inventorySettingsSchema = z.object({
+  requireReviewBeforeClose: z.boolean(),
+  allowCloseWithUncounted: z.boolean(),
+  uncountedMeansZero: z.boolean(),
+  liquidPresets: z.array(z.coerce.number().min(0).max(20)).min(1).max(20),
+  liquidStep: z.coerce.number().min(0.01).max(1),
+  staleOpenDays: z.coerce.number().int().min(1).max(365),
+  showMlAlongsideBottles: z.boolean(),
+});
 
 const patchSchema = z.object({
   name: z.string().min(1).max(120).optional(),
@@ -77,6 +94,7 @@ const patchSchema = z.object({
     .array(z.string().trim().min(1).max(120))
     .max(40)
     .optional(),
+  inventorySettings: inventorySettingsSchema.optional(),
 });
 
 export async function PATCH(req: Request) {
@@ -89,7 +107,8 @@ export async function PATCH(req: Request) {
     const parsed = patchSchema.safeParse(await req.json());
     if (!parsed.success) return jsonError("Validation failed", 400);
 
-    const { complimentaryReasons, ...hotelFields } = parsed.data;
+    const { complimentaryReasons, inventorySettings, ...hotelFields } =
+      parsed.data;
 
     const data: Prisma.HotelUpdateInput = { ...hotelFields };
 
@@ -111,6 +130,12 @@ export async function PATCH(req: Request) {
         ...prev,
         complimentaryReasons: cleaned,
       } as Prisma.InputJsonValue;
+    }
+
+    if (inventorySettings !== undefined) {
+      data.inventorySettings = parseInventorySettings(
+        inventorySettings
+      ) as unknown as Prisma.InputJsonValue;
     }
 
     const hotel = await prisma.hotel.update({
@@ -136,6 +161,7 @@ export async function PATCH(req: Request) {
       complimentaryReasons:
         complimentaryReasons ??
         parseComplimentaryReasons(hotel.posSettings),
+      inventorySettings: parseInventorySettings(hotel.inventorySettings),
     });
   } catch (e) {
     if (isNextResponse(e)) return e;

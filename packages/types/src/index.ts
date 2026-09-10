@@ -171,6 +171,27 @@ export type PosSettingsJson = {
   complimentaryReasons?: string[];
 };
 
+/** Hotel-level inventory count workflow preferences. */
+export type InventorySettingsJson = {
+  requireReviewBeforeClose: boolean;
+  allowCloseWithUncounted: boolean;
+  uncountedMeansZero: boolean;
+  liquidPresets: number[];
+  liquidStep: number;
+  staleOpenDays: number;
+  showMlAlongsideBottles: boolean;
+};
+
+export const DEFAULT_INVENTORY_SETTINGS: InventorySettingsJson = {
+  requireReviewBeforeClose: true,
+  allowCloseWithUncounted: false,
+  uncountedMeansZero: false,
+  liquidPresets: [0, 0.25, 0.5, 0.75, 1],
+  liquidStep: 0.05,
+  staleOpenDays: 14,
+  showMlAlongsideBottles: true,
+};
+
 export const POS_ARTICLE_TYPES = ["PRODUCT", "RECIPE"] as const;
 export type PosArticleType = (typeof POS_ARTICLE_TYPES)[number];
 

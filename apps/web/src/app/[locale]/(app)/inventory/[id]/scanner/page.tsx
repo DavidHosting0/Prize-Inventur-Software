@@ -7,19 +7,25 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   CameraBarcodeScanner,
-  ScanQtyControls,
   BarcodeResolvePanel,
   UnknownBarcodeActions,
 } from "@/components/barcode";
+import { InventoryQtyControls } from "@/components/inventory-qty-controls";
 import { resolveBarcode, type ResolvedBarcodeProduct } from "@/lib/barcode-client";
 import { toNumber } from "@/lib/money";
 import { mlToBottleInput } from "@/lib/liquid-stock-format";
+import {
+  DEFAULT_INVENTORY_SETTINGS,
+  type InventorySettingsJson,
+} from "@prize/types";
 
 type CurrentProduct = {
   productId: string;
   name: string;
   barcode: string | null;
   systemQty: number;
+  trackLiquid: boolean;
+  bottleContentMl: number | null;
 };
 
 export default function InventoryScannerPage() {
@@ -46,6 +52,9 @@ export default function InventoryScannerPage() {
       return res.json();
     },
   });
+
+  const settings: InventorySettingsJson =
+    count?.inventorySettings ?? DEFAULT_INVENTORY_SETTINGS;
 
   const saveMutation = useMutation({
     mutationFn: async () => {
@@ -101,6 +110,8 @@ export default function InventoryScannerPage() {
         name: product.name,
         barcode: product.barcode ?? product.ean ?? null,
         systemQty,
+        trackLiquid,
+        bottleContentMl,
       });
       setQty(counted);
       setUnknownCode(null);
@@ -136,7 +147,6 @@ export default function InventoryScannerPage() {
     [applyProduct, tb]
   );
 
-  // Resume after creating a product
   useEffect(() => {
     const createdId = searchParams.get("createdProductId");
     if (!createdId || !count?.id) return;
@@ -189,12 +199,20 @@ export default function InventoryScannerPage() {
           countedQty={qty}
           difference={difference}
         >
-          <ScanQtyControls
+          <InventoryQtyControls
             qty={qty}
             onChange={setQty}
             onConfirm={() => saveMutation.mutate()}
             confirmLabel={t("saveNext")}
             confirming={saveMutation.isPending}
+            trackLiquid={current.trackLiquid}
+            presets={settings.liquidPresets}
+            step={settings.liquidStep}
+            unitLabel={t("bottlesUnit")}
+            bottleContentMl={current.bottleContentMl}
+            showMl={settings.showMlAlongsideBottles}
+            fullBottlesLabel={t("fullBottles")}
+            openBottleLabel={t("openBottle")}
           />
         </BarcodeResolvePanel>
       ) : null}
