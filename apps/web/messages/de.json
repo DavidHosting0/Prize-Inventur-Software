@@ -40,8 +40,9 @@
     "reason": "Grund"
   },
   "auth": {
-    "loginTitle": "Anmeldung",
-    "loginSubtitle": "Hotelbetrieb: Inventur, Kasse und Warenwirtschaft",
+    "loginTitle": "Anmelden",
+    "welcomeBack": "Willkommen zurück",
+    "username": "Benutzername",
     "email": "E-Mail",
     "password": "Passwort",
     "signIn": "Anmelden",
@@ -50,20 +51,14 @@
     "brandName": "Prize Hotel",
     "brandTag": "Inventur & Kasse",
     "panelEyebrow": "Prize by Radisson",
-    "capabilityInventory": "Inventur & Bestand",
-    "capabilityPos": "Kasse (POS)",
-    "capabilityOps": "Warenwirtschaft",
-    "panelFooter": "Nur autorisierte Mitarbeitende",
-    "accessLabel": "Geschützter Bereich",
-    "demoHint": "Demo",
-    "signingIn": "Anmeldung…",
-    "systemSection": "System",
-    "credentialsSection": "Zugangsdaten",
-    "specGroup": "Gruppe",
-    "specProduct": "Produkt",
-    "specModules": "Module",
-    "specScope": "Bereich",
-    "systemLine": "Backoffice · Workstation"
+    "heroTitle": "Prize by Radisson Bern",
+    "heroSubtitle": "Mitarbeiter-Login für Inventur, Kasse und Betrieb.",
+    "panelFooter": "Sicherer Zugang nur für autorisierte Mitarbeitende.",
+    "beta": "Beta",
+    "rememberUsername": "Benutzername merken",
+    "contactAdmin": "Admin für Zugang kontaktieren",
+    "installApp": "App auf dem Handy installieren",
+    "signingIn": "Anmeldung…"
   },
   "nav": {
     "sections": {

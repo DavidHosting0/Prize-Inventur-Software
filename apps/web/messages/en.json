@@ -41,7 +41,8 @@
   },
   "auth": {
     "loginTitle": "Sign in",
-    "loginSubtitle": "Hotel operations: inventory, POS, and purchasing",
+    "welcomeBack": "Welcome back",
+    "username": "Username",
     "email": "Email",
     "password": "Password",
     "signIn": "Sign in",
@@ -50,20 +51,14 @@
     "brandName": "Prize Hotel",
     "brandTag": "Inventory & POS",
     "panelEyebrow": "Prize by Radisson",
-    "capabilityInventory": "Inventory & stock",
-    "capabilityPos": "Point of sale",
-    "capabilityOps": "Purchasing",
-    "panelFooter": "Authorized staff only",
-    "accessLabel": "Restricted area",
-    "demoHint": "Demo",
-    "signingIn": "Signing in…",
-    "systemSection": "System",
-    "credentialsSection": "Credentials",
-    "specGroup": "Group",
-    "specProduct": "Product",
-    "specModules": "Modules",
-    "specScope": "Scope",
-    "systemLine": "Backoffice · Workstation"
+    "heroTitle": "Prize by Radisson Bern",
+    "heroSubtitle": "Staff sign-in for inventory, POS, and operations.",
+    "panelFooter": "Secure access for authorized personnel only.",
+    "beta": "Beta",
+    "rememberUsername": "Remember username",
+    "contactAdmin": "Contact admin for access",
+    "installApp": "Install app on your phone",
+    "signingIn": "Signing in…"
   },
   "nav": {
     "sections": {

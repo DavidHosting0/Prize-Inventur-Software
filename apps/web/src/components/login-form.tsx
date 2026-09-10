@@ -2,10 +2,16 @@
 
 import { signIn } from "next-auth/react";
 import { useTranslations, useLocale } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Button, Input, Label } from "@prize/ui";
 import { hotelAppPath, localeAppPath } from "@/lib/hotel-url";
+
+const REMEMBER_KEY = "prize-login-email";
+
+type BeforeInstallPromptEvent = Event & {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+};
 
 export function LoginForm() {
   const t = useTranslations("auth");
@@ -13,8 +19,30 @@ export function LoginForm() {
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("admin@demo-hotel.ch");
   const [password, setPassword] = useState("Demo123!");
+  const [remember, setRemember] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [installEvent, setInstallEvent] =
+    useState<BeforeInstallPromptEvent | null>(null);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(REMEMBER_KEY);
+      if (saved) {
+        setEmail(saved);
+        setRemember(true);
+      }
+    } catch {
+      /* ignore */
+    }
+
+    const onBip = (e: Event) => {
+      e.preventDefault();
+      setInstallEvent(e as BeforeInstallPromptEvent);
+    };
+    window.addEventListener("beforeinstallprompt", onBip);
+    return () => window.removeEventListener("beforeinstallprompt", onBip);
+  }, []);
 
   function safeNextPath(): string | null {
     const raw = searchParams.get("next");
@@ -33,6 +61,14 @@ export function LoginForm() {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    try {
+      if (remember) localStorage.setItem(REMEMBER_KEY, email);
+      else localStorage.removeItem(REMEMBER_KEY);
+    } catch {
+      /* ignore */
+    }
+
     const res = await signIn("credentials", {
       email,
       password,
@@ -74,105 +110,85 @@ export function LoginForm() {
     window.location.href = localeAppPath(locale, "/dashboard");
   }
 
-  const modules = [
-    t("capabilityInventory"),
-    t("capabilityPos"),
-    t("capabilityOps"),
-  ];
+  async function onInstallClick() {
+    if (!installEvent) return;
+    await installEvent.prompt();
+    setInstallEvent(null);
+  }
 
   return (
-    <section className="login-station" aria-labelledby="login-station-title">
-      <div className="login-station-titlebar">
-        <h1 id="login-station-title">{t("loginTitle")}</h1>
-        <span className="login-station-titlebar-meta">{t("accessLabel")}</span>
+    <div className="login-form-wrap">
+      <div className="login-form-head">
+        <p className="login-beta">{t("beta")}</p>
+        <h1 className="login-form-title">{t("loginTitle")}</h1>
+        <p className="login-form-welcome">{t("welcomeBack")}</p>
       </div>
 
-      <div className="login-station-body">
-        <aside className="login-station-info">
-          <h2 className="login-station-section">{t("systemSection")}</h2>
-          <dl className="login-spec">
-            <div>
-              <dt>{t("specGroup")}</dt>
-              <dd>{t("panelEyebrow")}</dd>
-            </div>
-            <div>
-              <dt>{t("specProduct")}</dt>
-              <dd>
-                {t("brandName")} · {t("brandTag")}
-              </dd>
-            </div>
-            <div>
-              <dt>{t("specModules")}</dt>
-              <dd>
-                <ul className="login-module-list">
-                  {modules.map((name) => (
-                    <li key={name}>{name}</li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
-            <div>
-              <dt>{t("specScope")}</dt>
-              <dd>{t("loginSubtitle")}</dd>
-            </div>
-          </dl>
-        </aside>
-
-        <div className="login-station-credentials">
-          <h2 className="login-station-section">{t("credentialsSection")}</h2>
-          <form onSubmit={onSubmit} className="login-cred-form">
-            <div className="login-cred-row">
-              <Label htmlFor="email" className="login-cred-label">
-                {t("email")}
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="username"
-                required
-                className="login-cred-input"
-              />
-            </div>
-            <div className="login-cred-row">
-              <Label htmlFor="password" className="login-cred-label">
-                {t("password")}
-              </Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
-                required
-                className="login-cred-input"
-              />
-            </div>
-
-            {error ? (
-              <div className="login-cred-error" role="alert">
-                {error}
-              </div>
-            ) : null}
-
-            <div className="login-cred-actions">
-              <Button
-                type="submit"
-                className="login-cred-submit"
-                disabled={loading}
-              >
-                {loading ? t("signingIn") : t("signIn")}
-              </Button>
-            </div>
-          </form>
-
-          <div className="login-cred-note">
-            <span>{t("demoHint")}</span>
-            <code>admin@demo-hotel.ch</code>
-          </div>
+      <form onSubmit={onSubmit} className="login-form">
+        <div className="login-field">
+          <label htmlFor="email" className="login-label">
+            {t("username")}
+          </label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="username"
+            required
+            className="login-input"
+          />
         </div>
+
+        <div className="login-field">
+          <label htmlFor="password" className="login-label">
+            {t("password")}
+          </label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+            required
+            className="login-input"
+          />
+        </div>
+
+        {error ? (
+          <div className="login-error" role="alert">
+            {error}
+          </div>
+        ) : null}
+
+        <div className="login-form-meta">
+          <label className="login-remember">
+            <input
+              type="checkbox"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+            />
+            <span>{t("rememberUsername")}</span>
+          </label>
+          <a className="login-link" href="mailto:admin@demo-hotel.ch">
+            {t("contactAdmin")}
+          </a>
+        </div>
+
+        <button type="submit" className="login-submit" disabled={loading}>
+          {loading ? t("signingIn") : t("signIn")}
+        </button>
+      </form>
+
+      <div className="login-form-foot">
+        {installEvent ? (
+          <button type="button" className="login-install" onClick={onInstallClick}>
+            {t("installApp")}
+          </button>
+        ) : (
+          <span className="login-install login-install-static">{t("installApp")}</span>
+        )}
       </div>
-    </section>
+    </div>
   );
 }
