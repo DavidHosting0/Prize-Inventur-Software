@@ -1,0 +1,6 @@
+# Seed media for products & cocktails — keep in repo
+*
+!.gitignore
+!*.jpg
+!*.png
+!*.webp

@@ -1,0 +1,32 @@
+{
+  "name": "prize-hotel",
+  "private": true,
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "dev": "turbo run dev --filter=@prize/web",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "pnpm --filter @prize/web test",
+    "db:embedded": "node scripts/start-embedded-pg.mjs",
+    "db:generate": "pnpm --filter @prize/web exec prisma generate",
+    "db:migrate": "pnpm --filter @prize/web exec prisma migrate deploy",
+    "db:migrate:dev": "pnpm --filter @prize/web exec prisma migrate dev",
+    "db:push": "pnpm --filter @prize/web exec prisma db push",
+    "db:seed": "pnpm --filter @prize/web exec prisma db seed",
+    "db:studio": "pnpm --filter @prize/web exec prisma studio",
+    "mobile": "pnpm --filter @prize/mobile start",
+    "desktop": "pnpm --filter @prize/desktop dev",
+    "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "embedded-postgres": "18.4.0-beta.17",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "^19.0.12",
+      "@types/react-dom": "^19.0.4"
+    }
+  }
+}

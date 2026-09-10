@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: prize
+      POSTGRES_PASSWORD: prize
+      POSTGRES_DB: prize_hotel
+    volumes:
+      - prize_pg_data:/var/lib/postgresql/data
+
+volumes:
+  prize_pg_data:

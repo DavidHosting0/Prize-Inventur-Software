@@ -1,0 +1,17 @@
+node_modules
+.turbo
+.next
+dist
+build
+.env
+.env.local
+*.log
+.DS_Store
+coverage
+.vercel
+apps/desktop/src-tauri/target
+apps/mobile/.expo
+*.tsbuildinfo
+
+.data
+apps/web/.env

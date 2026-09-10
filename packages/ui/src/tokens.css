@@ -1,0 +1,85 @@
+:root,
+[data-theme="dark"] {
+  /* Dense ops dark — kept for optional dark mode */
+  --bg: #0e1420;
+  --bg-elevated: #141b2a;
+  --sidebar: #121826;
+  --sidebar-hover: #1a2233;
+  --sidebar-text: #eef2f8;
+  --sidebar-text-muted: #9aa8bd;
+  --sidebar-text-dim: #6f7e95;
+  --card: #161e2e;
+  --card-hover: #1c2640;
+  --border: #2a3448;
+  --border-subtle: #222b3d;
+  --text: #eef2f8;
+  --text-muted: #9aa8bd;
+  --text-dim: #6f7e95;
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-muted: rgba(59, 130, 246, 0.14);
+  --accent: #0f766e;
+  --accent-soft: rgba(15, 118, 110, 0.16);
+  --success: #22c55e;
+  --success-hover: #16a34a;
+  --success-muted: rgba(34, 197, 94, 0.14);
+  --warning: #f59e0b;
+  --warning-muted: rgba(245, 158, 11, 0.14);
+  --danger: #ef4444;
+  --danger-muted: rgba(239, 68, 68, 0.14);
+  --header: #121826;
+  --input-bg: #0c111b;
+  --focus-ring: rgba(255, 255, 255, 0.55);
+  --nav-active-bg: #0f172a;
+  --nav-active-border: #0f172a;
+  --nav-active-text: #ffffff;
+  --table-zebra: rgba(255, 255, 255, 0.02);
+  --breadcrumb-bg: rgba(15, 118, 110, 0.12);
+  --radius: 8px;
+  --radius-sm: 6px;
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --shadow-sm: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="light"] {
+  /* Hospitality ops light — aligned with POS terminal */
+  --bg: #e8edf5;
+  --bg-elevated: #ffffff;
+  --sidebar: #ffffff;
+  --sidebar-hover: #f1f5f9;
+  --sidebar-text: #0f172a;
+  --sidebar-text-muted: #475569;
+  --sidebar-text-dim: #94a3b8;
+  --card: #ffffff;
+  --card-hover: #f8fafc;
+  --border: #c5cedb;
+  --border-subtle: #e8edf4;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #64748b;
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
+  --primary-muted: rgba(29, 78, 216, 0.1);
+  --accent: #0f766e;
+  --accent-soft: rgba(15, 118, 110, 0.12);
+  --success: #16a34a;
+  --success-hover: #15803d;
+  --success-muted: rgba(22, 163, 74, 0.12);
+  --warning: #d97706;
+  --warning-muted: rgba(217, 119, 6, 0.12);
+  --danger: #dc2626;
+  --danger-muted: rgba(220, 38, 38, 0.12);
+  --header: #ffffff;
+  --input-bg: #ffffff;
+  --focus-ring: rgba(29, 78, 216, 0.45);
+  --nav-active-bg: #0f172a;
+  --nav-active-border: #0f172a;
+  --nav-active-text: #ffffff;
+  --table-zebra: #f4f7fb;
+  --breadcrumb-bg: #eef2f7;
+  --radius: 8px;
+  --radius-sm: 6px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.1);
+}

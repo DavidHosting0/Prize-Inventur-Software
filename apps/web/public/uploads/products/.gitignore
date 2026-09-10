@@ -1,0 +1,3 @@
+# ignore uploaded product images
+*
+!.gitignore

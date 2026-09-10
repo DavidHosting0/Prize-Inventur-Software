@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Prize Hotel",
+    "slug": "prize-hotel",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f2744"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "ch.prize.hotel"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f2744"
+      },
+      "package": "ch.prize.hotel"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "apiUrl": "http://192.168.1.25:3000"
+    }
+  }
+}
