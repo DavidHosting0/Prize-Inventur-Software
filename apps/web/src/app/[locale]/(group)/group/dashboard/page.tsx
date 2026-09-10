@@ -9,7 +9,7 @@ import { Badge, Card, CardBody, CardHeader, KpiCard } from "@prize/ui";
 import { formatMoney } from "@/lib/money";
 import { EnterHotelButton } from "@/components/enter-hotel-button";
 import { DataTablePanel } from "@/components/data-table-panel";
-import { Building2, PackageWarning } from "lucide-react";
+import { Building2, PackageX } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
 const DashboardCharts = dynamic(
@@ -175,7 +175,7 @@ export default function GroupDashboardPage() {
                       <div className="absolute right-2 top-2">
                         <Badge tone="danger">
                           <span className="inline-flex items-center gap-1">
-                            <PackageWarning className="h-3 w-3" />
+                            <PackageX className="h-3 w-3" />
                             {h.criticalStock}
                           </span>
                         </Badge>
