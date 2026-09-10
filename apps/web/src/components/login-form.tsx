@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { Button, Input, Label } from "@prize/ui";
 import { hotelAppPath, localeAppPath } from "@/lib/hotel-url";
 import { BrandMark } from "./brand-mark";
+import { Lock, ShieldCheck } from "lucide-react";
 
 export function LoginForm() {
   const t = useTranslations("auth");
@@ -76,24 +77,29 @@ export function LoginForm() {
   }
 
   return (
-    <div className="w-full max-w-[420px] overflow-hidden rounded-[10px] border border-[var(--border)] bg-[var(--card)] shadow-[var(--shadow-md)]">
-      <div className="border-b border-[var(--border)] bg-gradient-to-b from-white to-[#f8fafc] px-5 py-4">
+    <div className="login-panel">
+      <header className="login-panel-header">
         <BrandMark
           name={t("brandName")}
           tag={t("brandTag")}
           className="sidebar-brand !h-auto !min-h-0 !border-0 !bg-transparent !p-0"
         />
+        <div className="login-panel-meta">
+          <span className="login-access-badge">
+            <ShieldCheck size={13} strokeWidth={2.25} aria-hidden />
+            {t("accessLabel")}
+          </span>
+          <span className="login-locale">{locale.toUpperCase()}</span>
+        </div>
+      </header>
+
+      <div className="login-panel-intro">
+        <h1 className="login-panel-title">{t("loginTitle")}</h1>
+        <p className="login-panel-subtitle">{t("loginSubtitle")}</p>
       </div>
-      <div className="border-b border-[var(--border-subtle)] px-6 pt-5 pb-1">
-        <h1 className="text-lg font-bold tracking-tight text-[var(--text)]">
-          {t("loginTitle")}
-        </h1>
-        <p className="mt-1 text-[13px] text-[var(--text-muted)]">
-          {t("loginSubtitle")}
-        </p>
-      </div>
-      <form onSubmit={onSubmit} className="space-y-4 px-6 py-5">
-        <div>
+
+      <form onSubmit={onSubmit} className="login-panel-form">
+        <div className="login-field">
           <Label htmlFor="email">{t("email")}</Label>
           <Input
             id="email"
@@ -102,9 +108,10 @@ export function LoginForm() {
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="username"
             required
+            className="h-10"
           />
         </div>
-        <div>
+        <div className="login-field">
           <Label htmlFor="password">{t("password")}</Label>
           <Input
             id="password"
@@ -113,20 +120,32 @@ export function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
             required
+            className="h-10"
           />
         </div>
         {error ? (
-          <div className="rounded-md border border-[var(--danger)]/25 bg-[var(--danger-muted)] px-3 py-2 text-sm text-[var(--danger)]">
+          <div
+            className="rounded-[var(--radius-sm)] border border-[var(--danger)]/25 bg-[var(--danger-muted)] px-3 py-2.5 text-sm text-[var(--danger)]"
+            role="alert"
+          >
             {error}
           </div>
         ) : null}
-        <Button type="submit" className="w-full" disabled={loading}>
-          {loading ? "…" : t("signIn")}
+        <Button
+          type="submit"
+          size="lg"
+          className="login-submit w-full"
+          disabled={loading}
+        >
+          <Lock size={15} strokeWidth={2.25} aria-hidden />
+          {loading ? t("signingIn") : t("signIn")}
         </Button>
       </form>
-      <div className="border-t border-[var(--border)] bg-[#f8fafc] px-6 py-3 text-[11px] text-[var(--text-dim)]">
-        {locale.toUpperCase()} · admin@demo-hotel.ch
-      </div>
+
+      <footer className="login-panel-footer">
+        <span className="login-footer-label">{t("demoHint")}</span>
+        <code className="login-footer-code">admin@demo-hotel.ch</code>
+      </footer>
     </div>
   );
 }

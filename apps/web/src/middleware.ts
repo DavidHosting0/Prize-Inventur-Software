@@ -37,9 +37,18 @@ export default async function middleware(request: NextRequest) {
   const first = parts[0]?.toLowerCase();
   const second = parts[1]?.toLowerCase();
 
+  // Behind HTTPS reverse proxy, Auth.js sets `__Secure-authjs.session-token`.
+  // Middleware must use secureCookie or getToken returns null → redirect loop.
+  const useSecureCookie =
+    process.env.NODE_ENV === "production" ||
+    (process.env.NEXTAUTH_URL ?? process.env.AUTH_URL ?? "").startsWith(
+      "https://"
+    );
+
   const token = await getToken({
     req: request,
     secret: process.env.AUTH_SECRET ?? process.env.NEXTAUTH_SECRET,
+    secureCookie: useSecureCookie,
   });
 
   const accountType = (token?.accountType as string | undefined) ?? null;

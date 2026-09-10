@@ -120,6 +120,8 @@ model Hotel {
   imageUrl       String?
   /// POS config: { vouchers: [...], complimentaryReasons: string[] }
   posSettings    Json?
+  /// Inventory workflow: review/close policies, liquid presets, etc.
+  inventorySettings Json?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 

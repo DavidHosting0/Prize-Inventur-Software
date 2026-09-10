@@ -40,15 +40,28 @@
     "reason": "Reason"
   },
   "auth": {
-    "loginTitle": "Sign in",
-    "loginSubtitle": "Sign in to your hotel account",
+    "loginTitle": "Staff sign-in",
+    "loginSubtitle": "Access inventory, POS, and purchasing for your Prize properties.",
     "email": "Email",
     "password": "Password",
     "signIn": "Sign in",
     "signOut": "Sign out",
     "invalidCredentials": "Invalid email or password",
     "brandName": "Prize Hotel",
-    "brandTag": "Inventory & POS"
+    "brandTag": "Inventory & POS",
+    "panelEyebrow": "Prize by Radisson",
+    "panelHeadline": "Operations software for inventory and POS",
+    "panelBody": "One system for stock counts, goods receipt, and front-of-house sales — built for hotel day-to-day work.",
+    "capabilityInventory": "Inventory & stock",
+    "capabilityInventoryHint": "Counts, variances, locations",
+    "capabilityPos": "Point of sale",
+    "capabilityPosHint": "Fast service for bar and F&B",
+    "capabilityOps": "Purchasing ops",
+    "capabilityOpsHint": "Orders, transfers, goods receipt",
+    "panelFooter": "Authorized hotel group staff only",
+    "accessLabel": "Secure access",
+    "demoHint": "Demo account",
+    "signingIn": "Signing in…"
   },
   "nav": {
     "sections": {

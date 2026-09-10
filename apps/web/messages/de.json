@@ -40,15 +40,28 @@
     "reason": "Grund"
   },
   "auth": {
-    "loginTitle": "Anmelden",
-    "loginSubtitle": "Melden Sie sich bei Ihrem Hotelkonto an",
+    "loginTitle": "Mitarbeiter-Anmeldung",
+    "loginSubtitle": "Zugang zu Inventur, Kasse und Warenwirtschaft Ihrer Prize-Häuser.",
     "email": "E-Mail",
     "password": "Passwort",
     "signIn": "Anmelden",
     "signOut": "Abmelden",
     "invalidCredentials": "Ungültige E-Mail oder Passwort",
     "brandName": "Prize Hotel",
-    "brandTag": "Inventur & Kasse"
+    "brandTag": "Inventur & Kasse",
+    "panelEyebrow": "Prize by Radisson",
+    "panelHeadline": "Betriebssoftware für Inventur und Kasse",
+    "panelBody": "Ein System für Bestände, Wareneingänge und Front-of-House-Verkauf — abgestimmt auf den Hotelalltag.",
+    "capabilityInventory": "Inventur & Bestand",
+    "capabilityInventoryHint": "Zählungen, Differenzen, Lagerorte",
+    "capabilityPos": "Kasse (POS)",
+    "capabilityPosHint": "Schnellverkauf für Bar und F&B",
+    "capabilityOps": "Warenwirtschaft",
+    "capabilityOpsHint": "Bestellungen, Transfers, Wareneingang",
+    "panelFooter": "Nur für autorisierte Mitarbeitende der Hotelgruppe",
+    "accessLabel": "Geschützter Zugang",
+    "demoHint": "Demo-Zugang",
+    "signingIn": "Anmeldung…"
   },
   "nav": {
     "sections": {
