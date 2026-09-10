@@ -367,11 +367,7 @@ export default function InventoryDetailPage() {
         <Kpi label={t("kpiDiffs")} value={String(stats.diffs)} />
         <Kpi
           label={t("kpiValueDiff")}
-          value={formatMoney({
-            amount: stats.valueDiffSum,
-            currency,
-            locale,
-          })}
+          value={formatMoney(stats.valueDiffSum, currency, locale)}
         />
       </div>
 
@@ -529,11 +525,7 @@ export default function InventoryDetailPage() {
                     </td>
                     <td className="tabular-nums">
                       {item.valueDiff != null
-                        ? formatMoney({
-                            amount: toNumber(item.valueDiff),
-                            currency,
-                            locale,
-                          })
+                        ? formatMoney(toNumber(item.valueDiff), currency, locale)
                         : "—"}
                     </td>
                   </tr>
