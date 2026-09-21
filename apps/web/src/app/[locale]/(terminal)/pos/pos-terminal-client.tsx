@@ -565,14 +565,14 @@ export function PosTerminalClient({
             <div className="relative min-w-0 flex-1">
               <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-dim)]" />
               <Input
-                className="h-12 rounded-xl border-[var(--border)] bg-white pl-11 text-base shadow-[var(--shadow-sm)] text-[var(--text)]"
+                className="h-12 rounded-xl border-[var(--border)] bg-[var(--card)] pl-11 text-base text-[var(--text)] placeholder:text-[var(--text-dim)]"
                 placeholder={t("searchProducts")}
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
               />
             </div>
             <HardwareBarcodeInput
-              className="h-12 max-w-[220px] rounded-xl border-[var(--border)] bg-white font-mono text-base shadow-[var(--shadow-sm)] text-[var(--text)]"
+              className="h-12 max-w-[220px] rounded-xl border-[var(--border)] bg-[var(--card)] font-mono text-base text-[var(--text)] placeholder:text-[var(--text-dim)]"
               placeholder={t("scanBarcode")}
               dataName="pos-barcode"
               autoFocus
@@ -669,7 +669,7 @@ export function PosTerminalClient({
             }}
           >
             {sellableProducts.length === 0 ? (
-              <div className="flex h-full min-h-[200px] items-center justify-center rounded-2xl border border-dashed border-[var(--border)] bg-white/70 px-6 text-center text-sm text-[var(--text-muted)]">
+              <div className="flex h-full min-h-[200px] items-center justify-center rounded-2xl border border-dashed border-[var(--border)] bg-[var(--card)]/70 px-6 text-center text-sm text-[var(--text-muted)]">
                 {t("cartEmpty")}
               </div>
             ) : (
@@ -776,7 +776,7 @@ export function PosTerminalClient({
             )}
           </div>
 
-          <div className="mt-3 flex shrink-0 flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-[var(--border-subtle)] bg-white/80 px-3 py-2 text-[11px] text-[var(--text-dim)]">
+          <div className="mt-3 flex shrink-0 flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-[var(--border-subtle)] bg-[var(--card)]/80 px-3 py-2 text-[11px] text-[var(--text-dim)]">
             <span>
               <kbd className="kbd">F2</kbd> Barcode
             </span>
@@ -954,8 +954,8 @@ export function PosTerminalClient({
                       }}
                       className={
                         canDiscount
-                          ? "inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-white text-[var(--danger,#b91c1c)] hover:bg-red-50"
-                          : "ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-white text-[var(--danger,#b91c1c)] hover:bg-red-50"
+                          ? "inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--card)] text-[var(--danger)] hover:bg-[var(--danger-muted)]"
+                          : "ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--card)] text-[var(--danger)] hover:bg-[var(--danger-muted)]"
                       }
                       title={t("remove")}
                       aria-label={t("remove")}
@@ -988,7 +988,7 @@ export function PosTerminalClient({
                               className={
                                 !freeReasonCustom && freeReason === reason
                                   ? "min-h-11 rounded-xl bg-[var(--pos-accent)] px-3 py-2 text-sm font-bold text-white"
-                                  : "min-h-11 rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm font-medium text-[var(--text)] hover:bg-[var(--card-hover)]"
+                                  : "min-h-11 rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-sm font-medium text-[var(--text)] hover:bg-[var(--card-hover)]"
                               }
                             >
                               {reason}
@@ -1005,7 +1005,7 @@ export function PosTerminalClient({
                           className={
                             freeReasonCustom
                               ? "min-h-11 rounded-xl bg-[var(--pos-accent)] px-3 py-2 text-sm font-bold text-white"
-                              : "min-h-11 rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm font-medium text-[var(--text)] hover:bg-[var(--card-hover)]"
+                              : "min-h-11 rounded-xl border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-sm font-medium text-[var(--text)] hover:bg-[var(--card-hover)]"
                           }
                         >
                           {t("freeReasonOther")}
@@ -1013,7 +1013,7 @@ export function PosTerminalClient({
                       </div>
                       {freeReasonCustom ? (
                         <Input
-                          className="h-11 rounded-lg border-[var(--border)] bg-white text-[var(--text)]"
+                          className="h-11 rounded-lg border-[var(--border)] bg-[var(--card)] text-[var(--text)]"
                           placeholder={t("freeReasonCustom")}
                           value={freeReason}
                           autoFocus
@@ -1044,7 +1044,7 @@ export function PosTerminalClient({
                           className={
                             activeVoucher === v.code
                               ? "min-h-12 rounded-xl bg-[var(--pos-accent)] px-2 text-sm font-bold text-white shadow-md"
-                              : "min-h-12 rounded-xl border border-[var(--border)] bg-white px-2 text-sm font-semibold text-[var(--text)] shadow-sm hover:bg-[var(--card-hover)] disabled:opacity-40"
+                              : "min-h-12 rounded-xl border border-[var(--border)] bg-[var(--card)] px-2 text-sm font-semibold text-[var(--text)] shadow-sm hover:bg-[var(--card-hover)] disabled:opacity-40"
                           }
                         >
                           {v.name}
@@ -1060,7 +1060,7 @@ export function PosTerminalClient({
                           type="number"
                           min={0}
                           max={100}
-                          className="h-11 rounded-lg border-[var(--border)] bg-white text-[var(--text)]"
+                          className="h-11 rounded-lg border-[var(--border)] bg-[var(--card)] text-[var(--text)]"
                           placeholder={t("manualPercent")}
                           value={manualPercentInput}
                           onChange={(e) =>
@@ -1074,7 +1074,7 @@ export function PosTerminalClient({
                         <button
                           type="button"
                           onClick={applyManualPercent}
-                          className="h-11 shrink-0 rounded-lg border border-[var(--border)] bg-white px-2.5 text-xs font-bold text-[var(--text)] hover:bg-[var(--card-hover)]"
+                          className="h-11 shrink-0 rounded-lg border border-[var(--border)] bg-[var(--card)] px-2.5 text-xs font-bold text-[var(--text)] hover:bg-[var(--card-hover)]"
                         >
                           %
                         </button>
@@ -1084,7 +1084,7 @@ export function PosTerminalClient({
                           type="number"
                           min={0}
                           step="0.05"
-                          className="h-11 rounded-lg border-[var(--border)] bg-white text-[var(--text)]"
+                          className="h-11 rounded-lg border-[var(--border)] bg-[var(--card)] text-[var(--text)]"
                           placeholder={t("manualAmount")}
                           value={manualAmountInput}
                           onChange={(e) => setManualAmountInput(e.target.value)}
@@ -1096,7 +1096,7 @@ export function PosTerminalClient({
                         <button
                           type="button"
                           onClick={applyManualAmount}
-                          className="h-11 shrink-0 rounded-lg border border-[var(--border)] bg-white px-2.5 text-xs font-bold text-[var(--text)] hover:bg-[var(--card-hover)]"
+                          className="h-11 shrink-0 rounded-lg border border-[var(--border)] bg-[var(--card)] px-2.5 text-xs font-bold text-[var(--text)] hover:bg-[var(--card-hover)]"
                         >
                           {currency}
                         </button>
@@ -1170,8 +1170,8 @@ export function PosTerminalClient({
 
       {payPanel ? (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/50 p-3 backdrop-blur-[2px] desktop:items-center">
-          <div className="w-full max-w-md overflow-hidden rounded-2xl border border-[var(--border)] bg-white text-[var(--text)] shadow-[0_24px_60px_rgba(15,23,42,0.28)]">
-            <div className="flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 px-4 py-3.5 text-white">
+          <div className="w-full max-w-md overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] text-[var(--text)] shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+            <div className="flex items-center justify-between bg-gradient-to-r from-[#141b26] to-[#1a2230] px-4 py-3.5 text-white">
               <h3 className="text-lg font-semibold">
                 {payPanel.step === "choose"
                   ? t("choosePayment")
@@ -1223,7 +1223,7 @@ export function PosTerminalClient({
                       className={
                         payPanel.method === "CARD"
                           ? "min-h-14 rounded-xl bg-[var(--pos-pay)] font-bold text-white shadow-md"
-                          : "min-h-14 rounded-xl border border-[var(--border)] bg-white font-semibold text-[var(--text)] hover:bg-[var(--card-hover)]"
+                          : "min-h-14 rounded-xl border border-[var(--border)] bg-[var(--card)] font-semibold text-[var(--text)] hover:bg-[var(--card-hover)]"
                       }
                     >
                       {t("card")}
@@ -1236,7 +1236,7 @@ export function PosTerminalClient({
                       className={
                         payPanel.method === "TWINT"
                           ? "min-h-14 rounded-xl bg-[var(--pos-pay)] font-bold text-white shadow-md"
-                          : "min-h-14 rounded-xl border border-[var(--border)] bg-white font-semibold text-[var(--text)] hover:bg-[var(--card-hover)]"
+                          : "min-h-14 rounded-xl border border-[var(--border)] bg-[var(--card)] font-semibold text-[var(--text)] hover:bg-[var(--card-hover)]"
                       }
                     >
                       {t("twint")}
@@ -1275,7 +1275,7 @@ export function PosTerminalClient({
                       className={
                         payPanel.method === "CASH"
                           ? "min-h-14 rounded-xl bg-[var(--pos-accent)] font-bold text-white shadow-md"
-                          : "min-h-14 rounded-xl border border-[var(--border)] bg-white font-semibold text-[var(--text)] hover:bg-[var(--card-hover)]"
+                          : "min-h-14 rounded-xl border border-[var(--border)] bg-[var(--card)] font-semibold text-[var(--text)] hover:bg-[var(--card-hover)]"
                       }
                     >
                       {t("cash")}
@@ -1288,7 +1288,7 @@ export function PosTerminalClient({
                       className={
                         payPanel.method === "OFFLINE"
                           ? "min-h-14 rounded-xl bg-[var(--pos-accent)] font-bold text-white shadow-md"
-                          : "min-h-14 rounded-xl border border-[var(--border)] bg-white font-semibold text-[var(--text)] hover:bg-[var(--card-hover)]"
+                          : "min-h-14 rounded-xl border border-[var(--border)] bg-[var(--card)] font-semibold text-[var(--text)] hover:bg-[var(--card-hover)]"
                       }
                     >
                       {t("offlineSettle")}
@@ -1331,7 +1331,7 @@ export function PosTerminalClient({
           onClick={() => setRecipeGuide(null)}
         >
           <div
-            className="max-h-[85vh] w-full max-w-lg overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-xl"
+            className="max-h-[85vh] w-full max-w-lg overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-3 border-b border-[var(--border)] px-4 py-3">
@@ -1432,7 +1432,7 @@ function QtyBtn({
     <button
       type="button"
       onClick={onClick}
-      className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border)] bg-white text-lg font-semibold text-[var(--text)] shadow-sm hover:bg-[var(--card-hover)] active:scale-95"
+      className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--card)] text-lg font-semibold text-[var(--text)] shadow-sm hover:bg-[var(--card-hover)] active:scale-95"
     >
       {children}
     </button>
@@ -1450,7 +1450,7 @@ function BigChoice({
     <button
       type="button"
       onClick={onClick}
-      className="min-h-[4.25rem] rounded-xl border border-[var(--border)] bg-[var(--pos-surface)] text-base font-bold text-[var(--text)] shadow-sm transition hover:border-[var(--pos-accent)]/40 hover:bg-white"
+      className="min-h-[4.25rem] rounded-xl border border-[var(--border)] bg-[var(--card)] text-base font-bold text-[var(--text)] shadow-sm transition hover:border-[var(--pos-accent)]/40 hover:bg-[var(--card-hover)]"
     >
       {label}
     </button>

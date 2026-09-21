@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LayoutDashboard, LogOut, Banknote } from "lucide-react";
 
-/** Full-screen POS chrome — utilitarian light header. */
+/** Full-screen POS chrome — modern dark terminal. */
 export function PosTerminalShell({
   children,
   title,
@@ -46,7 +46,7 @@ export function PosTerminalShell({
 
   return (
     <div
-      data-theme="light"
+      data-theme="dark"
       data-pos-terminal
       className="pos-terminal flex h-screen flex-col overflow-hidden text-[var(--text)]"
     >
