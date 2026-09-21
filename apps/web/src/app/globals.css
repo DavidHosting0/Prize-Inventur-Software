@@ -80,7 +80,7 @@ body {
     align-items: center;
     gap: 0.55rem;
     width: 100%;
-    border-radius: 0;
+    border-radius: var(--radius);
     padding: 0.45rem 0.65rem 0.45rem 0.55rem;
     font-size: 13px;
     font-weight: 500;
@@ -130,7 +130,7 @@ body {
     flex-shrink: 0;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
-    background: #fff;
+    background: var(--card);
     object-fit: contain;
   }
   .sidebar-brand-mark {
@@ -217,18 +217,18 @@ body {
     gap: 0.4rem;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
-    background: #fff;
+    background: var(--card);
     padding: 0.35rem 0.7rem;
     font-size: 12px;
     font-weight: 600;
-    color: #334155;
+    color: var(--text-muted);
     box-shadow: none;
     transition: background 0.1s ease, border-color 0.1s ease, color 0.1s ease;
   }
   .chrome-btn:hover {
-    background: #f1f5f9;
-    border-color: #94a3b8;
-    color: #0f172a;
+    background: var(--card-hover);
+    border-color: var(--text-dim);
+    color: var(--text);
   }
 
   .page-title {

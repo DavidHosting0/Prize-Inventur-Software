@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     title: "Prize Hotel",
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
   },
   icons: {
     icon: [
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" data-theme="light" suppressHydrationWarning>
+    <html lang="de" data-theme="dark" suppressHydrationWarning>
       <body className={`${ibmPlex.variable} font-sans antialiased`} style={{ fontFamily: "var(--font-ibm), var(--font-sans)" }}>
         {children}
       </body>
