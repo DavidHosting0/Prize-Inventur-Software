@@ -6,7 +6,11 @@ export type DemoModuleId =
   | "haccp"
   | "food-cost"
   | "variances"
-  | "valuation";
+  | "valuation"
+  | "group-revenue"
+  | "group-top-products"
+  | "group-savings"
+  | "group-insights";
 
 export type DemoBadgeTone = "default" | "success" | "warning" | "danger" | "primary";
 export type DemoKpiTone = "default" | "success" | "warning" | "danger";
@@ -36,6 +40,7 @@ export type DemoModuleDef = {
   id: DemoModuleId;
   navItemKey: string;
   actionKey: string;
+  shell?: "app" | "group";
   kpis: DemoKpiDef[];
   tables: DemoTableDef[];
 };
@@ -691,6 +696,219 @@ export const DEMO_MODULES: Record<DemoModuleId, DemoModuleDef> = {
             chf(340),
             chf(328),
             badge("classC", "default"),
+          ],
+        ],
+      },
+    ],
+  },
+
+  "group-revenue": {
+    id: "group-revenue",
+    navItemKey: "groupRevenue",
+    actionKey: "export",
+    shell: "group",
+    kpis: [
+      { key: "group30d", value: chf(142800) },
+      { key: "bernShare", value: pct(61.9), hintKey: "group-revenue.hintBern" },
+      {
+        key: "bestDelta",
+        value: txt("+8.4 %"),
+        hintKey: "group-revenue.hintZurich",
+        tone: "success",
+      },
+      { key: "vsLastMonth", value: txt("+6.2 %"), tone: "success" },
+    ],
+    tables: [
+      {
+        titleKey: "byHotel",
+        columns: ["hotel", "thisMonth", "delta", "status"],
+        rows: [
+          [
+            txt("Prize Bern"),
+            chf(88420),
+            txt("+5.1 %"),
+            badge("lead", "primary"),
+          ],
+          [
+            txt("Prize Zurich"),
+            chf(54380),
+            txt("+8.4 %"),
+            badge("rising", "success"),
+          ],
+        ],
+      },
+    ],
+  },
+
+  "group-top-products": {
+    id: "group-top-products",
+    navItemKey: "groupTopProducts",
+    actionKey: "export",
+    shell: "group",
+    kpis: [
+      { key: "topSku", value: txt("Gin Tonic") },
+      { key: "topRevenue", value: chf(18420) },
+      { key: "share", value: pct(12.9) },
+      { key: "classA", value: num(8) },
+    ],
+    tables: [
+      {
+        titleKey: "ranking",
+        columns: ["product", "hotel", "revenue", "margin", "rank"],
+        rows: [
+          [
+            txt("Gin Tonic"),
+            txt("Prize Bern"),
+            chf(12480),
+            pct(71.2),
+            badge("classA", "primary"),
+          ],
+          [
+            txt("Coca-Cola 0.33"),
+            txt("Gruppe"),
+            chf(9620),
+            pct(78.4),
+            badge("classA", "primary"),
+          ],
+          [
+            txt("Gin Tonic"),
+            txt("Prize Zurich"),
+            chf(5940),
+            pct(69.8),
+            badge("classA", "primary"),
+          ],
+          [
+            txt("Croissant"),
+            txt("Prize Bern"),
+            chf(4280),
+            pct(54.1),
+            badge("classB", "warning"),
+          ],
+          [
+            txt("Minibar Wasser 0.5"),
+            txt("Gruppe"),
+            chf(3120),
+            pct(82.0),
+            badge("classA", "primary"),
+          ],
+          [
+            txt("Whisky Cola"),
+            txt("Prize Zurich"),
+            chf(2860),
+            pct(64.5),
+            badge("classB", "warning"),
+          ],
+        ],
+      },
+    ],
+  },
+
+  "group-savings": {
+    id: "group-savings",
+    navItemKey: "groupSavings",
+    actionKey: "export",
+    shell: "group",
+    kpis: [
+      { key: "identified", value: chf(4180), tone: "success" },
+      { key: "waste", value: chf(860), tone: "warning" },
+      { key: "overstock", value: chf(2140) },
+      { key: "priceGap", value: chf(1180) },
+    ],
+    tables: [
+      {
+        titleKey: "opportunities",
+        columns: ["topic", "hotel", "amount", "action", "status"],
+        rows: [
+          [
+            label("saveContract"),
+            txt("Gruppe"),
+            chf(1180),
+            label("actAlign"),
+            badge("highImpact", "danger"),
+          ],
+          [
+            label("saveOverstock"),
+            txt("Prize Zurich"),
+            chf(1240),
+            label("actPar"),
+            badge("highImpact", "danger"),
+          ],
+          [
+            label("saveWaste"),
+            txt("Prize Bern"),
+            chf(420),
+            label("actPar"),
+            badge("watch", "warning"),
+          ],
+          [
+            label("saveSlow"),
+            txt("Prize Zurich"),
+            chf(740),
+            label("actPromo"),
+            badge("watch", "warning"),
+          ],
+          [
+            label("savePour"),
+            txt("Prize Bern"),
+            chf(600),
+            label("actTrain"),
+            badge("mediumImpact", "default"),
+          ],
+        ],
+      },
+    ],
+  },
+
+  "group-insights": {
+    id: "group-insights",
+    navItemKey: "groupInsights",
+    actionKey: "export",
+    shell: "group",
+    kpis: [
+      { key: "open", value: num(6) },
+      { key: "priority", value: num(2), tone: "danger" },
+      { key: "impact", value: chf(3920), tone: "success" },
+      { key: "accepted", value: pct(64) },
+    ],
+    tables: [
+      {
+        titleKey: "recs",
+        columns: ["insight", "hotel", "impact", "priority", "status"],
+        rows: [
+          [
+            label("insContract"),
+            txt("Gruppe"),
+            chf(1180),
+            badge("highImpact", "danger"),
+            badge("newRec", "primary"),
+          ],
+          [
+            label("insPar"),
+            txt("Prize Zurich"),
+            chf(1240),
+            badge("highImpact", "danger"),
+            badge("inReview", "warning"),
+          ],
+          [
+            label("insCroissant"),
+            txt("Prize Bern"),
+            chf(420),
+            badge("mediumImpact", "default"),
+            badge("newRec", "primary"),
+          ],
+          [
+            label("insGin"),
+            txt("Gruppe"),
+            chf(680),
+            badge("mediumImpact", "default"),
+            badge("planned", "default"),
+          ],
+          [
+            label("insFoodCost"),
+            txt("Prize Bern"),
+            chf(400),
+            badge("watch", "warning"),
+            badge("inReview", "warning"),
           ],
         ],
       },

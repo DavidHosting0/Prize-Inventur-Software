@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { AppShell } from "@/components/app-shell";
+import { GroupShell } from "@/components/group-shell";
 import { Badge, Button, KpiCard } from "@prize/ui";
 import { DataTablePanel } from "@/components/data-table-panel";
 import { formatMoney } from "@/lib/money";
@@ -48,9 +49,10 @@ export function DemoModuleView({ id }: { id: DemoModuleId }) {
   const currency = session?.user?.currency ?? "CHF";
   const locale = session?.user?.hotelLocale ?? "de-CH";
   const mod = DEMO_MODULES[id];
+  const Shell = mod.shell === "group" ? GroupShell : AppShell;
 
   return (
-    <AppShell
+    <Shell
       title={t(`${id}.title`)}
       subtitle={t(`${id}.subtitle`)}
       breadcrumbs={[{ label: tn(`items.${mod.navItemKey}`) }]}
@@ -112,6 +114,6 @@ export function DemoModuleView({ id }: { id: DemoModuleId }) {
           </DataTablePanel>
         ))}
       </div>
-    </AppShell>
+    </Shell>
   );
 }

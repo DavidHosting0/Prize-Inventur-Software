@@ -8,6 +8,10 @@ import {
   Plug,
   Settings,
   ScrollText,
+  TrendingUp,
+  Award,
+  Wallet,
+  Lightbulb,
   type LucideIcon,
 } from "lucide-react";
 import type { NavSectionDef } from "./nav";
@@ -43,6 +47,36 @@ export const GROUP_NAV_SECTIONS: NavSectionDef[] = [
         primary: true,
         go: "a",
         alt: "3",
+      },
+    ],
+  },
+  {
+    id: "analysis",
+    titleKey: "sections.analysis",
+    items: [
+      {
+        href: "/group/revenue-compare",
+        labelKey: "groupRevenue",
+        icon: TrendingUp,
+        go: "r",
+      },
+      {
+        href: "/group/top-products",
+        labelKey: "groupTopProducts",
+        icon: Award,
+        go: "t",
+      },
+      {
+        href: "/group/savings",
+        labelKey: "groupSavings",
+        icon: Wallet,
+        go: "s",
+      },
+      {
+        href: "/group/insights",
+        labelKey: "groupInsights",
+        icon: Lightbulb,
+        go: "n",
       },
     ],
   },

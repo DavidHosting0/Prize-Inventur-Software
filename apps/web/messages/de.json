@@ -103,6 +103,10 @@
       "groupDashboard": "Dashboard",
       "groupHotels": "Hotels",
       "groupAnalytics": "Analysen",
+      "groupRevenue": "Umsatzvergleich",
+      "groupTopProducts": "Top-Produkte",
+      "groupSavings": "Sparpotenzial",
+      "groupInsights": "Empfehlungen",
       "groupUsers": "Benutzer",
       "groupPermissions": "Berechtigungen",
       "groupAiConfig": "KI-Konfiguration",
@@ -957,7 +961,13 @@
       "watch": "Achtung",
       "classA": "A",
       "classB": "B",
-      "classC": "C"
+      "classC": "C",
+      "lead": "Führend",
+      "rising": "Im Plus",
+      "highImpact": "Hoch",
+      "mediumImpact": "Mittel",
+      "newRec": "Neu",
+      "inReview": "Prüfung"
     },
     "labels": {
       "bar": "Bar",
@@ -987,7 +997,21 @@
       "reasonPrep": "Trim",
       "reasonMinibar": "Minibar",
       "reasonCount": "Zählfehler",
-      "reasonWaste": "Waste"
+      "reasonWaste": "Waste",
+      "saveContract": "Einkaufspreis Cola",
+      "saveOverstock": "Überbestand Whisky",
+      "saveWaste": "Food Waste Croissant",
+      "saveSlow": "Ladenhüter Snacks",
+      "savePour": "Ausschenk-Schwund Gin",
+      "actAlign": "Vertrag bündeln",
+      "actPar": "Soll senken",
+      "actPromo": "Abverkaufen",
+      "actTrain": "Schulung Bar",
+      "insContract": "Cola-Vertrag gruppenweit",
+      "insPar": "Whisky-Par Zurich senken",
+      "insCroissant": "Frühstückspar Bern",
+      "insGin": "Gin Tonic als Group-Push",
+      "insFoodCost": "Restaurant Food Cost Bern"
     },
     "lots": {
       "title": "MHD & Chargen",
@@ -1175,6 +1199,88 @@
         "fifoValue": "FIFO",
         "share": "Anteil",
         "abc": "ABC"
+      }
+    },
+    "group-revenue": {
+      "title": "Umsatzvergleich",
+      "subtitle": "Einnahmen Prize Bern vs. Prize Zurich, laufender Monat",
+      "hintBern": "Anteil Bern",
+      "hintZurich": "Stärkstes Wachstum",
+      "kpis": {
+        "group30d": "Gruppe 30 Tage",
+        "bernShare": "Anteil Bern",
+        "bestDelta": "Bestes Plus",
+        "vsLastMonth": "Vs. Vormonat"
+      },
+      "tables": {
+        "byHotel": "Nach Hotel"
+      },
+      "columns": {
+        "hotel": "Hotel",
+        "thisMonth": "Dieser Monat",
+        "lastMonth": "Vormonat",
+        "delta": "Diff.",
+        "status": "Status"
+      }
+    },
+    "group-top-products": {
+      "title": "Top-Produkte",
+      "subtitle": "Artikel mit dem höchsten Umsatz in der Gruppe",
+      "kpis": {
+        "topSku": "Stärkster Artikel",
+        "topRevenue": "Umsatz Top-SKU",
+        "share": "Anteil am Umsatz",
+        "classA": "A-Artikel"
+      },
+      "tables": {
+        "ranking": "Umsatz-Ranking"
+      },
+      "columns": {
+        "product": "Artikel",
+        "hotel": "Hotel",
+        "revenue": "Umsatz",
+        "margin": "Marge",
+        "rank": "ABC"
+      }
+    },
+    "group-savings": {
+      "title": "Sparpotenzial",
+      "subtitle": "Wo sich Einkauf, Schwund und Überbestand am meisten lohnen",
+      "kpis": {
+        "identified": "Identifiziert",
+        "waste": "Food Waste",
+        "overstock": "Überbestand",
+        "priceGap": "Preisdifferenz"
+      },
+      "tables": {
+        "opportunities": "Hebel"
+      },
+      "columns": {
+        "topic": "Thema",
+        "hotel": "Hotel",
+        "amount": "Potenzial",
+        "action": "Massnahme",
+        "status": "Prio"
+      }
+    },
+    "group-insights": {
+      "title": "Empfehlungen",
+      "subtitle": "Konkrete Vorschläge für Umsatz und Kosten in der Gruppe",
+      "kpis": {
+        "open": "Offen",
+        "priority": "Hohe Prio",
+        "impact": "Erwarteter Effekt",
+        "accepted": "Umgesetzt"
+      },
+      "tables": {
+        "recs": "Vorschläge"
+      },
+      "columns": {
+        "insight": "Empfehlung",
+        "hotel": "Hotel",
+        "impact": "Effekt",
+        "priority": "Prio",
+        "status": "Status"
       }
     }
   }

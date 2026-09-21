@@ -103,6 +103,10 @@
       "groupDashboard": "Dashboard",
       "groupHotels": "Hotels",
       "groupAnalytics": "Analytics",
+      "groupRevenue": "Revenue compare",
+      "groupTopProducts": "Top products",
+      "groupSavings": "Savings",
+      "groupInsights": "Insights",
       "groupUsers": "Users",
       "groupPermissions": "Permissions",
       "groupAiConfig": "AI Configuration",
@@ -957,7 +961,13 @@
       "watch": "Watch",
       "classA": "A",
       "classB": "B",
-      "classC": "C"
+      "classC": "C",
+      "lead": "Lead",
+      "rising": "Rising",
+      "highImpact": "High",
+      "mediumImpact": "Medium",
+      "newRec": "New",
+      "inReview": "Review"
     },
     "labels": {
       "bar": "Bar",
@@ -987,7 +997,21 @@
       "reasonPrep": "Prep / trim",
       "reasonMinibar": "Minibar unposted",
       "reasonCount": "Count error",
-      "reasonWaste": "Food waste"
+      "reasonWaste": "Food waste",
+      "saveContract": "Coke purchase price",
+      "saveOverstock": "Whisky overstock",
+      "saveWaste": "Croissant waste",
+      "saveSlow": "Slow-moving snacks",
+      "savePour": "Gin pour variance",
+      "actAlign": "Bundle contract",
+      "actPar": "Lower par",
+      "actPromo": "Sell through",
+      "actTrain": "Bar training",
+      "insContract": "Group-wide Coke deal",
+      "insPar": "Cut whisky par Zurich",
+      "insCroissant": "Breakfast par Bern",
+      "insGin": "Push Gin Tonic group-wide",
+      "insFoodCost": "Restaurant food cost Bern"
     },
     "lots": {
       "title": "Lots & expiry",
@@ -1175,6 +1199,88 @@
         "fifoValue": "FIFO",
         "share": "Share",
         "abc": "ABC"
+      }
+    },
+    "group-revenue": {
+      "title": "Revenue compare",
+      "subtitle": "Prize Bern vs Prize Zurich revenue, current month",
+      "hintBern": "Bern share",
+      "hintZurich": "Fastest growth",
+      "kpis": {
+        "group30d": "Group 30 days",
+        "bernShare": "Bern share",
+        "bestDelta": "Best lift",
+        "vsLastMonth": "Vs last month"
+      },
+      "tables": {
+        "byHotel": "By hotel"
+      },
+      "columns": {
+        "hotel": "Hotel",
+        "thisMonth": "This month",
+        "lastMonth": "Last month",
+        "delta": "Var.",
+        "status": "Status"
+      }
+    },
+    "group-top-products": {
+      "title": "Top products",
+      "subtitle": "SKUs with the highest group revenue",
+      "kpis": {
+        "topSku": "Top SKU",
+        "topRevenue": "Top SKU revenue",
+        "share": "Share of sales",
+        "classA": "A-class items"
+      },
+      "tables": {
+        "ranking": "Revenue ranking"
+      },
+      "columns": {
+        "product": "Product",
+        "hotel": "Hotel",
+        "revenue": "Revenue",
+        "margin": "Margin",
+        "rank": "ABC"
+      }
+    },
+    "group-savings": {
+      "title": "Savings potential",
+      "subtitle": "Where purchasing, waste and overstock pay off most",
+      "kpis": {
+        "identified": "Identified",
+        "waste": "Food waste",
+        "overstock": "Overstock",
+        "priceGap": "Price gap"
+      },
+      "tables": {
+        "opportunities": "Levers"
+      },
+      "columns": {
+        "topic": "Topic",
+        "hotel": "Hotel",
+        "amount": "Potential",
+        "action": "Action",
+        "status": "Prio"
+      }
+    },
+    "group-insights": {
+      "title": "Insights",
+      "subtitle": "Concrete group recommendations for sales and cost",
+      "kpis": {
+        "open": "Open",
+        "priority": "High prio",
+        "impact": "Expected impact",
+        "accepted": "Adopted"
+      },
+      "tables": {
+        "recs": "Recommendations"
+      },
+      "columns": {
+        "insight": "Insight",
+        "hotel": "Hotel",
+        "impact": "Impact",
+        "priority": "Prio",
+        "status": "Status"
       }
     }
   }
