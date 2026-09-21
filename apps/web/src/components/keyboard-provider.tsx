@@ -238,8 +238,17 @@ export function KeyboardProvider({
           f: "/food-waste",
           b: "/breakfast",
           m: "/minibar",
+          l: "/lots",
+          q: "/reorder",
+          t: "/outlets",
+          j: "/banquet",
+          h: "/haccp",
+          y: "/food-cost",
+          v: "/variances",
+          x: "/valuation",
           e: "/reports",
           n: "/users",
+          k: "/pos-config",
           ",": "/settings",
         };
         if (map[chord]) {

@@ -67,6 +67,7 @@
       "purchase": "Purchasing",
       "catalog": "Catalog",
       "fb": "F&B",
+      "analysis": "Analysis",
       "admin": "Admin",
       "overview": "Overview",
       "operations": "Operations",
@@ -86,6 +87,14 @@
       "foodWaste": "Food waste",
       "breakfast": "Breakfast",
       "minibar": "Minibar",
+      "lots": "Lots & expiry",
+      "reorder": "Reorder",
+      "outlets": "Cost centers",
+      "banquet": "Banquet",
+      "haccp": "HACCP",
+      "foodCost": "Food cost",
+      "variances": "Count variances",
+      "valuation": "Stock valuation",
       "suppliers": "Suppliers",
       "reports": "Reports",
       "users": "Users",
@@ -918,5 +927,255 @@
     "instructionsHint": "Shown on the till via the book icon on the recipe tile.",
     "hasInstructions": "Instructions set",
     "liquidPourHint": "Enter liquid ingredients in ml (e.g. 40–50 ml gin)."
+  },
+  "demoModules": {
+    "actions": {
+      "export": "Export",
+      "createOrder": "Create order",
+      "newOutlet": "New cost center",
+      "newEvent": "New event",
+      "recordCheck": "Record check"
+    },
+    "status": {
+      "critical": "Critical",
+      "soon": "Soon",
+      "ok": "OK",
+      "expired": "Expired",
+      "urgent": "Urgent",
+      "due": "Due",
+      "planned": "Planned",
+      "okStock": "On par",
+      "belowPar": "Low",
+      "confirmed": "Confirmed",
+      "inProgress": "In progress",
+      "done": "Done",
+      "pass": "Pass",
+      "fail": "Deviation",
+      "contains": "Yes",
+      "free": "–",
+      "traces": "Tr.",
+      "watch": "Watch",
+      "classA": "A",
+      "classB": "B",
+      "classC": "C"
+    },
+    "labels": {
+      "bar": "Bar",
+      "kitchen": "Kitchen",
+      "restaurant": "Restaurant",
+      "banquet": "Banquet",
+      "housekeeping": "Housekeeping",
+      "breakfast": "Breakfast",
+      "minibar": "Minibar",
+      "drinks": "Drinks",
+      "snacks": "Snacks",
+      "other": "Other",
+      "eventBoard": "Board meeting",
+      "eventWedding": "Meier wedding",
+      "eventApéro": "Corporate apéro",
+      "eventSeminar": "Swisscom seminar",
+      "eventWine": "Wine pairing",
+      "eventStaff": "Staff event",
+      "coldRoom1": "Cold room 1",
+      "coldRoom2": "Cold room 2",
+      "freezer": "Freezer",
+      "barFridge": "Bar fridge",
+      "minibarStore": "Minibar store",
+      "breakfastFridge": "Breakfast fridge",
+      "reasonPour": "Pour variance",
+      "reasonComp": "Complimentary",
+      "reasonPrep": "Prep / trim",
+      "reasonMinibar": "Minibar unposted",
+      "reasonCount": "Count error",
+      "reasonWaste": "Food waste"
+    },
+    "lots": {
+      "title": "Lots & expiry",
+      "subtitle": "Shelf life and lot tracking in Prize Bern stock",
+      "hintExpiring": "Next 7 days",
+      "hintExpired": "Quarantine now",
+      "kpis": {
+        "openLots": "Open lots",
+        "expiringSoon": "Expiring soon",
+        "expired": "Expired",
+        "valueAtRisk": "Value at risk"
+      },
+      "tables": {
+        "openLots": "Open lots"
+      },
+      "columns": {
+        "product": "Product",
+        "lot": "Lot",
+        "expiry": "BBD",
+        "daysLeft": "Days",
+        "qty": "Qty",
+        "location": "Location",
+        "status": "Status"
+      }
+    },
+    "reorder": {
+      "title": "Reorder",
+      "subtitle": "Items below minimum with suggested order qty",
+      "hintUrgent": "Lead time ≤ 2 days",
+      "kpis": {
+        "belowMin": "Below minimum",
+        "orderValue": "Suggested value",
+        "urgent": "Urgent",
+        "coverageDays": "Coverage avg"
+      },
+      "tables": {
+        "suggestions": "Reorder suggestions"
+      },
+      "columns": {
+        "product": "Product",
+        "sku": "SKU",
+        "stock": "Stock",
+        "min": "Min.",
+        "suggested": "Suggested",
+        "supplier": "Supplier",
+        "leadTime": "Lead time",
+        "status": "Status"
+      }
+    },
+    "outlets": {
+      "title": "Cost centers",
+      "subtitle": "Stock value and par levels by outlet",
+      "kpis": {
+        "count": "Outlets",
+        "stockValue": "Stock value",
+        "belowPar": "Below par",
+        "openRequisitions": "Open requisitions"
+      },
+      "tables": {
+        "overview": "Cost centers"
+      },
+      "columns": {
+        "outlet": "Outlet",
+        "code": "Code",
+        "manager": "Owner",
+        "stockValue": "Stock value",
+        "parFill": "Par fill",
+        "openReq": "Requisitions",
+        "status": "Status"
+      }
+    },
+    "banquet": {
+      "title": "Banquet",
+      "subtitle": "Events with reserved food cost",
+      "kpis": {
+        "eventsWeek": "Events this week",
+        "covers": "Covers",
+        "reservedValue": "Reserved food value",
+        "nextEvent": "Next event"
+      },
+      "tables": {
+        "events": "Upcoming events"
+      },
+      "columns": {
+        "event": "Event",
+        "date": "Date",
+        "covers": "Covers",
+        "menu": "Menu",
+        "foodValue": "Food value",
+        "status": "Status"
+      }
+    },
+    "haccp": {
+      "title": "HACCP",
+      "subtitle": "Cold-chain checks and allergen matrix",
+      "kpis": {
+        "fridges": "Cold units",
+        "lastCheck": "Last check",
+        "deviations": "Deviations",
+        "allergenItems": "Allergen items"
+      },
+      "tables": {
+        "temps": "Temperature log today",
+        "allergens": "Allergen matrix"
+      },
+      "columns": {
+        "location": "Unit",
+        "target": "Target",
+        "actual": "Actual",
+        "checkedAt": "Checked",
+        "by": "By",
+        "status": "Status",
+        "product": "Product",
+        "gluten": "Gluten",
+        "lactose": "Lactose",
+        "eggs": "Eggs",
+        "nuts": "Nuts",
+        "fish": "Fish"
+      }
+    },
+    "food-cost": {
+      "title": "Food cost",
+      "subtitle": "Theoretical vs actual cost of goods by outlet",
+      "hintTarget": "Target 28%",
+      "hintVariance": "Vs theoretical",
+      "kpis": {
+        "overall": "Overall food cost",
+        "theoretical": "Theoretical",
+        "variance": "Variance",
+        "revenue7d": "Revenue 7 days"
+      },
+      "tables": {
+        "byOutlet": "By outlet"
+      },
+      "columns": {
+        "outlet": "Outlet",
+        "revenue": "Revenue",
+        "theoretical": "Theory",
+        "actual": "Actual",
+        "foodCost": "COGS",
+        "variance": "Var.",
+        "status": "Status"
+      }
+    },
+    "variances": {
+      "title": "Count variances",
+      "subtitle": "Book stock vs last count, 15 Sep 2026",
+      "kpis": {
+        "lastCount": "Last count",
+        "shortage": "Shortage",
+        "overage": "Overage",
+        "net": "Net"
+      },
+      "tables": {
+        "lines": "Variance lines"
+      },
+      "columns": {
+        "product": "Product",
+        "sku": "SKU",
+        "book": "Book",
+        "counted": "Counted",
+        "diff": "Diff.",
+        "value": "Value",
+        "reason": "Reason"
+      }
+    },
+    "valuation": {
+      "title": "Stock valuation",
+      "subtitle": "Stock value by category, FIFO vs average",
+      "hintFifo": "FIFO above average",
+      "kpis": {
+        "stockValue": "Stock value",
+        "fifoDelta": "FIFO delta",
+        "categories": "Categories",
+        "slowMovers": "Slow movers"
+      },
+      "tables": {
+        "byCategory": "By category"
+      },
+      "columns": {
+        "category": "Category",
+        "skus": "SKUs",
+        "qty": "Qty",
+        "avgValue": "Average",
+        "fifoValue": "FIFO",
+        "share": "Share",
+        "abc": "ABC"
+      }
+    }
   }
 }

@@ -67,6 +67,7 @@
       "purchase": "Einkauf",
       "catalog": "Stamm",
       "fb": "F&B",
+      "analysis": "Analyse",
       "admin": "Verwaltung",
       "overview": "Übersicht",
       "operations": "Betrieb",
@@ -86,6 +87,14 @@
       "foodWaste": "Food Waste",
       "breakfast": "Frühstück",
       "minibar": "Minibar",
+      "lots": "MHD & Chargen",
+      "reorder": "Nachbestellung",
+      "outlets": "Kostenstellen",
+      "banquet": "Bankett",
+      "haccp": "HACCP",
+      "foodCost": "Food Cost",
+      "variances": "Inventurdifferenzen",
+      "valuation": "Lagerbewertung",
       "suppliers": "Lieferanten",
       "reports": "Berichte",
       "users": "Benutzer",
@@ -918,5 +927,255 @@
     "instructionsHint": "Wird in der Kasse über das Buch-Symbol am Rezept angezeigt.",
     "hasInstructions": "Anleitung hinterlegt",
     "liquidPourHint": "Flüssigkeitszutaten in ml angeben (z. B. 40–50 ml Gin)."
+  },
+  "demoModules": {
+    "actions": {
+      "export": "Exportieren",
+      "createOrder": "Bestellung erzeugen",
+      "newOutlet": "Kostenstelle anlegen",
+      "newEvent": "Event anlegen",
+      "recordCheck": "Kontrolle erfassen"
+    },
+    "status": {
+      "critical": "Kritisch",
+      "soon": "Bald",
+      "ok": "OK",
+      "expired": "Abgelaufen",
+      "urgent": "Dringend",
+      "due": "Fällig",
+      "planned": "Geplant",
+      "okStock": "Soll",
+      "belowPar": "Tief",
+      "confirmed": "Bestätigt",
+      "inProgress": "Laufend",
+      "done": "Erledigt",
+      "pass": "In Ordnung",
+      "fail": "Abweichung",
+      "contains": "Ja",
+      "free": "–",
+      "traces": "Sp.",
+      "watch": "Achtung",
+      "classA": "A",
+      "classB": "B",
+      "classC": "C"
+    },
+    "labels": {
+      "bar": "Bar",
+      "kitchen": "Küche",
+      "restaurant": "Restaurant",
+      "banquet": "Bankett",
+      "housekeeping": "Housekeeping",
+      "breakfast": "Frühstück",
+      "minibar": "Minibar",
+      "drinks": "Getränke",
+      "snacks": "Snacks",
+      "other": "Sonstiges",
+      "eventBoard": "Vorstandssitzung",
+      "eventWedding": "Hochzeit Meier",
+      "eventApéro": "Apéro Firmenkunden",
+      "eventSeminar": "Seminar Swisscom",
+      "eventWine": "Wine Pairing",
+      "eventStaff": "Mitarbeiteranlass",
+      "coldRoom1": "Kühlhaus 1",
+      "coldRoom2": "Kühlhaus 2",
+      "freezer": "Tiefkühler",
+      "barFridge": "Bar-Kühlschrank",
+      "minibarStore": "Minibar-Lager",
+      "breakfastFridge": "Frühstückskühlung",
+      "reasonPour": "Ausschenk",
+      "reasonComp": "Kulanz",
+      "reasonPrep": "Trim",
+      "reasonMinibar": "Minibar",
+      "reasonCount": "Zählfehler",
+      "reasonWaste": "Waste"
+    },
+    "lots": {
+      "title": "MHD & Chargen",
+      "subtitle": "Haltbarkeit und Chargen im Lager Prize Bern",
+      "hintExpiring": "Nächste 7 Tage",
+      "hintExpired": "Sofort sperren",
+      "kpis": {
+        "openLots": "Offene Chargen",
+        "expiringSoon": "Bald ablaufend",
+        "expired": "Abgelaufen",
+        "valueAtRisk": "Wert at risk"
+      },
+      "tables": {
+        "openLots": "Offene Chargen"
+      },
+      "columns": {
+        "product": "Artikel",
+        "lot": "Charge",
+        "expiry": "MHD",
+        "daysLeft": "Tage",
+        "qty": "Menge",
+        "location": "Ort",
+        "status": "Status"
+      }
+    },
+    "reorder": {
+      "title": "Nachbestellung",
+      "subtitle": "Artikel unter Mindestbestand mit Bestellvorschlag",
+      "hintUrgent": "Lieferzeit ≤ 2 Tage",
+      "kpis": {
+        "belowMin": "Unter Mindestbestand",
+        "orderValue": "Vorschlagswert",
+        "urgent": "Dringend",
+        "coverageDays": "Reichweite Ø"
+      },
+      "tables": {
+        "suggestions": "Bestellvorschläge"
+      },
+      "columns": {
+        "product": "Artikel",
+        "sku": "SKU",
+        "stock": "Bestand",
+        "min": "Min.",
+        "suggested": "Vorschlag",
+        "supplier": "Lieferant",
+        "leadTime": "Lieferzeit",
+        "status": "Status"
+      }
+    },
+    "outlets": {
+      "title": "Kostenstellen",
+      "subtitle": "Lagerwert und Sollbestand je Outlet",
+      "kpis": {
+        "count": "Outlets",
+        "stockValue": "Lagerwert",
+        "belowPar": "Unter Soll",
+        "openRequisitions": "Offene Anforderungen"
+      },
+      "tables": {
+        "overview": "Kostenstellen"
+      },
+      "columns": {
+        "outlet": "Outlet",
+        "code": "Code",
+        "manager": "Verantwortlich",
+        "stockValue": "Lagerwert",
+        "parFill": "Sollfüllung",
+        "openReq": "Anforderungen",
+        "status": "Status"
+      }
+    },
+    "banquet": {
+      "title": "Bankett",
+      "subtitle": "Events mit reserviertem Warenbedarf",
+      "kpis": {
+        "eventsWeek": "Events diese Woche",
+        "covers": "Gedecke",
+        "reservedValue": "Reservierter Warenwert",
+        "nextEvent": "Nächster Event"
+      },
+      "tables": {
+        "events": "Anstehende Events"
+      },
+      "columns": {
+        "event": "Event",
+        "date": "Datum",
+        "covers": "Gedecke",
+        "menu": "Menü",
+        "foodValue": "Warenwert",
+        "status": "Status"
+      }
+    },
+    "haccp": {
+      "title": "HACCP",
+      "subtitle": "Kühlketten-Kontrollen und Allergen-Matrix",
+      "kpis": {
+        "fridges": "Kühlstellen",
+        "lastCheck": "Letzte Kontrolle",
+        "deviations": "Abweichungen",
+        "allergenItems": "Allergen-Artikel"
+      },
+      "tables": {
+        "temps": "Temperaturprotokoll heute",
+        "allergens": "Allergen-Matrix"
+      },
+      "columns": {
+        "location": "Stelle",
+        "target": "Soll",
+        "actual": "Ist",
+        "checkedAt": "Kontrolle",
+        "by": "Durch",
+        "status": "Status",
+        "product": "Artikel",
+        "gluten": "Gluten",
+        "lactose": "Laktose",
+        "eggs": "Eier",
+        "nuts": "Nüsse",
+        "fish": "Fisch"
+      }
+    },
+    "food-cost": {
+      "title": "Food Cost",
+      "subtitle": "Theoretischer vs. tatsächlicher Wareneinsatz je Outlet",
+      "hintTarget": "Ziel 28 %",
+      "hintVariance": "Gegen Theorie",
+      "kpis": {
+        "overall": "Food Cost gesamt",
+        "theoretical": "Theoretisch",
+        "variance": "Differenz",
+        "revenue7d": "Umsatz 7 Tage"
+      },
+      "tables": {
+        "byOutlet": "Nach Outlet"
+      },
+      "columns": {
+        "outlet": "Outlet",
+        "revenue": "Umsatz",
+        "theoretical": "Theorie",
+        "actual": "Ist",
+        "foodCost": "Wareneinsatz",
+        "variance": "Diff.",
+        "status": "Status"
+      }
+    },
+    "variances": {
+      "title": "Inventurdifferenzen",
+      "subtitle": "Buchbestand vs. letzte Zählung, 15.09.2026",
+      "kpis": {
+        "lastCount": "Letzte Inventur",
+        "shortage": "Fehlmenge",
+        "overage": "Mehrbestand",
+        "net": "Saldo"
+      },
+      "tables": {
+        "lines": "Differenzpositionen"
+      },
+      "columns": {
+        "product": "Artikel",
+        "sku": "SKU",
+        "book": "Buch",
+        "counted": "gezählt",
+        "diff": "Diff.",
+        "value": "Wert",
+        "reason": "Ursache"
+      }
+    },
+    "valuation": {
+      "title": "Lagerbewertung",
+      "subtitle": "Bestandswert nach Warengruppe, FIFO vs. Durchschnitt",
+      "hintFifo": "FIFO über Durchschnitt",
+      "kpis": {
+        "stockValue": "Lagerwert",
+        "fifoDelta": "FIFO-Delta",
+        "categories": "Warengruppen",
+        "slowMovers": "Ladenhüter"
+      },
+      "tables": {
+        "byCategory": "Nach Warengruppe"
+      },
+      "columns": {
+        "category": "Warengruppe",
+        "skus": "SKUs",
+        "qty": "Menge",
+        "avgValue": "Durchschnitt",
+        "fifoValue": "FIFO",
+        "share": "Anteil",
+        "abc": "ABC"
+      }
+    }
   }
 }

@@ -14,6 +14,14 @@ import {
   Settings,
   BarChart3,
   Store,
+  CalendarClock,
+  PackagePlus,
+  Building2,
+  UtensilsCrossed,
+  ShieldCheck,
+  Percent,
+  GitCompare,
+  Scale,
   type LucideIcon,
 } from "lucide-react";
 
@@ -80,6 +88,8 @@ export const NAV_SECTIONS: NavSectionDef[] = [
         go: "i",
         alt: "4",
       },
+      { href: "/lots", labelKey: "lots", icon: CalendarClock, go: "l" },
+      { href: "/reorder", labelKey: "reorder", icon: PackagePlus, go: "q" },
     ],
   },
   {
@@ -128,6 +138,7 @@ export const NAV_SECTIONS: NavSectionDef[] = [
         icon: BookOpen,
         go: "c",
       },
+      { href: "/outlets", labelKey: "outlets", icon: Building2, go: "t" },
     ],
   },
   {
@@ -138,6 +149,17 @@ export const NAV_SECTIONS: NavSectionDef[] = [
       { href: "/food-waste", labelKey: "foodWaste", icon: Trash2, go: "f" },
       { href: "/breakfast", labelKey: "breakfast", icon: Coffee, go: "b" },
       { href: "/minibar", labelKey: "minibar", icon: BedDouble, go: "m" },
+      { href: "/banquet", labelKey: "banquet", icon: UtensilsCrossed, go: "j" },
+      { href: "/haccp", labelKey: "haccp", icon: ShieldCheck, go: "h" },
+    ],
+  },
+  {
+    id: "analysis",
+    titleKey: "sections.analysis",
+    items: [
+      { href: "/food-cost", labelKey: "foodCost", icon: Percent, go: "y" },
+      { href: "/variances", labelKey: "variances", icon: GitCompare, go: "v" },
+      { href: "/valuation", labelKey: "valuation", icon: Scale, go: "x" },
     ],
   },
   {
