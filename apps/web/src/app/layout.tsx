@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -8,11 +8,14 @@ const ibmPlex = IBM_Plex_Sans({
   variable: "--font-ibm",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#0f172a",
+};
+
 export const metadata: Metadata = {
   title: "Prize Hotel | Inventory & POS",
   description: "Hotel inventory, F&B and POS platform",
   manifest: "/manifest.webmanifest",
-  themeColor: "#0f172a",
   appleWebApp: {
     capable: true,
     title: "Prize Hotel",
