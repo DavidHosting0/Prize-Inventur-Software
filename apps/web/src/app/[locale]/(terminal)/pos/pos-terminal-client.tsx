@@ -1170,8 +1170,8 @@ export function PosTerminalClient({
 
       {payPanel ? (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/50 p-3 backdrop-blur-[2px] desktop:items-center">
-          <div className="w-full max-w-md overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] text-[var(--text)] shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
-            <div className="flex items-center justify-between bg-gradient-to-r from-[#141b26] to-[#1a2230] px-4 py-3.5 text-white">
+          <div className="w-full max-w-md overflow-hidden rounded-2xl border border-[var(--border)] bg-white text-[var(--text)] shadow-[0_24px_60px_rgba(15,23,42,0.28)]">
+            <div className="flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800 px-4 py-3.5 text-white">
               <h3 className="text-lg font-semibold">
                 {payPanel.step === "choose"
                   ? t("choosePayment")
