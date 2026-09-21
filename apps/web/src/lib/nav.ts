@@ -144,7 +144,6 @@ export const NAV_SECTIONS: NavSectionDef[] = [
   {
     id: "fb",
     titleKey: "sections.fb",
-    collapsedByDefault: true,
     items: [
       { href: "/food-waste", labelKey: "foodWaste", icon: Trash2, go: "f" },
       { href: "/breakfast", labelKey: "breakfast", icon: Coffee, go: "b" },
@@ -165,7 +164,6 @@ export const NAV_SECTIONS: NavSectionDef[] = [
   {
     id: "admin",
     titleKey: "sections.admin",
-    collapsedByDefault: true,
     items: [
       {
         href: "/reports",
