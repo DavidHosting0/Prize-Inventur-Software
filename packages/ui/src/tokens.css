@@ -30,20 +30,20 @@
   --header: #121826;
   --input-bg: #0c111b;
   --focus-ring: rgba(255, 255, 255, 0.55);
-  --nav-active-bg: #0f172a;
-  --nav-active-border: #0f172a;
-  --nav-active-text: #ffffff;
+  --nav-active-bg: transparent;
+  --nav-active-border: #3b82f6;
+  --nav-active-text: #eef2f8;
   --table-zebra: rgba(255, 255, 255, 0.02);
   --breadcrumb-bg: rgba(15, 118, 110, 0.12);
-  --radius: 8px;
-  --radius-sm: 6px;
+  --radius: 2px;
+  --radius-sm: 2px;
   --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --shadow-sm: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 1px 2px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-sm: none;
+  --shadow-md: none;
 }
 
 [data-theme="light"] {
-  /* Hospitality ops light — aligned with POS terminal */
+  /* Hospitality ops light — flat workshop look */
   --bg: #e8edf5;
   --bg-elevated: #ffffff;
   --sidebar: #ffffff;
@@ -73,13 +73,13 @@
   --header: #ffffff;
   --input-bg: #ffffff;
   --focus-ring: rgba(29, 78, 216, 0.45);
-  --nav-active-bg: #0f172a;
+  --nav-active-bg: transparent;
   --nav-active-border: #0f172a;
-  --nav-active-text: #ffffff;
+  --nav-active-text: #0f172a;
   --table-zebra: #f4f7fb;
   --breadcrumb-bg: #eef2f7;
-  --radius: 8px;
-  --radius-sm: 6px;
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
-  --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.1);
+  --radius: 2px;
+  --radius-sm: 2px;
+  --shadow-sm: none;
+  --shadow-md: none;
 }

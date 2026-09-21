@@ -24,22 +24,13 @@ export function KpiCard({
           ? "text-[var(--danger)]"
           : "text-[var(--text-muted)]";
 
-  const accentBorder =
-    tone === "success"
-      ? "border-l-[3px] border-l-[var(--success)]"
-      : tone === "warning"
-        ? "border-l-[3px] border-l-[var(--warning)]"
-        : tone === "danger"
-          ? "border-l-[3px] border-l-[var(--danger)]"
-          : "border-l-[3px] border-l-[var(--accent)]";
-
   return (
-    <Card className={cn("min-w-0", accentBorder, className)}>
+    <Card className={cn("min-w-0", className)}>
       <CardBody className="px-3.5 py-3">
-        <div className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--text-dim)]">
+        <div className="text-[12px] font-medium text-[var(--text-muted)]">
           {label}
         </div>
-        <div className="mt-1.5 text-[22px] font-bold leading-none tracking-tight text-[var(--text)] tabular-nums">
+        <div className="mt-1.5 font-mono text-[22px] font-semibold leading-none tracking-tight text-[var(--text)] tabular-nums">
           {value}
         </div>
         {hint ? (

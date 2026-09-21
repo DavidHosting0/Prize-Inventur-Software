@@ -136,7 +136,7 @@ function AppSidebar({
   }
 
   const sidebar = (
-    <aside className="flex h-full w-[252px] flex-col border-r border-[var(--border)] bg-[var(--sidebar)] shadow-[4px_0_24px_rgba(15,23,42,0.04)]">
+    <aside className="flex h-full w-[252px] flex-col border-r border-[var(--border)] bg-[var(--sidebar)]">
       <BrandMark name={hotelName} badge={th("officeBadge")} />
 
       <nav
@@ -244,7 +244,7 @@ function AppSidebar({
             className="absolute inset-0 bg-black/50"
             onClick={() => setDrawerOpen(false)}
           />
-          <div className="absolute inset-y-0 left-0 z-50 shadow-2xl">{sidebar}</div>
+          <div className="absolute inset-y-0 left-0 z-50 border-r border-[var(--border)]">{sidebar}</div>
         </div>
       ) : null}
     </>

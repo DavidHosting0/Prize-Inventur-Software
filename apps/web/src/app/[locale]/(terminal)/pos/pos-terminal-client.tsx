@@ -798,12 +798,12 @@ export function PosTerminalClient({
         <aside className="pos-cart flex min-h-0 flex-col border-l border-[var(--border)] p-3 desktop:p-4">
           <div className="pos-cart-header">
             <div className="flex items-center gap-2">
-              <ShoppingBag className="h-4 w-4 text-white/70" />
+              <ShoppingBag className="h-4 w-4 text-[var(--text-muted)]" />
               <div>
-                <div className="text-[15px] font-semibold tracking-tight">
+                <div className="text-[15px] font-semibold tracking-tight text-[var(--text)]">
                   {t("cart")}
                 </div>
-                <div className="text-[11px] text-white/55">
+                <div className="text-[11px] text-[var(--text-dim)]">
                   {cart.reduce((s, i) => s + i.quantity, 0)} {t("positions")}
                 </div>
               </div>
@@ -815,7 +815,7 @@ export function PosTerminalClient({
                 setCart([]);
                 setDiscount({ kind: "none" });
               }}
-              className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-white/15 bg-white/10 px-2.5 text-xs font-semibold text-white/85 hover:bg-red-500/25 hover:text-red-100 disabled:opacity-35"
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--card)] px-2.5 text-xs font-semibold text-[var(--text-muted)] hover:border-[var(--danger)] hover:bg-[var(--danger-muted)] hover:text-[var(--danger)] disabled:opacity-35"
             >
               <Trash2 className="h-3.5 w-3.5" />
               {t("clearCart")}
@@ -1130,10 +1130,10 @@ export function PosTerminalClient({
                 </div>
               ) : null}
               <div className="flex items-end justify-between gap-3">
-                <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-white/55">
+                <span className="text-[12px] font-medium text-white/65">
                   {t("totalDue")}
                 </span>
-                <span className="text-3xl font-bold tracking-tight tabular-nums">
+                <span className="font-mono text-3xl font-semibold tracking-tight tabular-nums">
                   {formatMoney(total, currency, locale)}
                 </span>
               </div>
